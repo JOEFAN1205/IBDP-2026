@@ -464,166 +464,91 @@
     margin-right: 6px;
   }
 
-  /* ========== SECTION 03: CALENDAR GRID ========== */
-  .cal-wrap { padding: 24px 28px; border-bottom: 1px solid var(--line); }
-  .cal {
+  /* ========== SECTION 03: TIMELINES ========== */
+  .timelines {
+    border-bottom: 1px solid var(--line);
+  }
+  .tl-row {
     display: grid;
-    grid-template-columns: 96px 32px repeat(24, minmax(0, 1fr));
-    font-family: 'JetBrains Mono', monospace;
-    border-top: 1px solid var(--line);
-    border-left: 1px solid var(--line);
+    grid-template-columns: 110px 1fr;
+    border-bottom: 1px solid var(--line);
   }
-  .cal-corner {
-    grid-column: 1 / 3;
+  .tl-row:last-child { border-bottom: none; }
+  .tl-label {
+    border-right: 1px solid var(--line);
+    padding: 14px 16px;
     background: var(--ink);
     color: var(--paper);
-    padding: 8px;
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-  .cal-date {
-    padding: 4px 2px;
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    background: var(--paper-2);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 44px;
-  }
-  .cal-date.weekend { background: #DCD4BD; }
-  .cal-date.first, .cal-date.last { background: var(--ink); color: var(--paper); }
-  .cal-date.peak-col { background: var(--red); color: var(--paper); }
-  .cal-date-d { font-size: 11px; font-weight: 700; font-family: 'Archivo', sans-serif; line-height: 1; }
-  .cal-date-dow { font-size: 8px; color: var(--muted); margin-top: 3px; letter-spacing: 0.12em; }
-  .cal-date.first .cal-date-dow,
-  .cal-date.last .cal-date-dow,
-  .cal-date.peak-col .cal-date-dow { color: var(--paper); opacity: 0.75; }
-
-  .cal-lbl {
-    grid-column: 1;
-    background: var(--ink);
-    color: var(--paper);
-    padding: 10px 10px;
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  .cal-lbl .n {
+  .tl-label .name {
     font-family: 'Archivo Black', sans-serif;
-    font-size: 22px;
+    font-size: 28px;
     line-height: 0.9;
     letter-spacing: -0.02em;
-  }
-  .cal-lbl .m {
-    font-size: 8px;
-    letter-spacing: 0.12em;
-    margin-top: 8px;
-    opacity: 0.75;
     text-transform: uppercase;
   }
-
-  .cal-slot-lbl {
-    grid-column: 2;
-    background: var(--paper-2);
-    border-right: 1px solid var(--line);
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.05em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ink);
+  .tl-label .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 8px;
+    opacity: 0.7;
   }
-  .cal-slot-lbl.am { border-bottom: 1px dashed rgba(0,0,0,0.25); }
-  .cal-slot-lbl.pm { border-bottom: 1px solid var(--line); }
-
-  .cal-cell {
-    border-right: 1px solid var(--line);
-    padding: 2px;
-    min-height: 48px;
+  .tl-track {
     position: relative;
+    padding: 18px 20px;
+    min-height: 120px;
+  }
+  .tl-axis {
+    position: relative;
+    height: 24px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 14px;
+  }
+  .tl-tick {
+    position: absolute;
+    bottom: 0;
+    width: 1px;
+    height: 6px;
+    background: var(--line);
+  }
+  .tl-tick.major {
+    height: 14px;
+  }
+  .tl-tick-lbl {
+    position: absolute;
+    bottom: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+  .tl-exam {
+    position: absolute;
+    bottom: 0;
+    height: 42px;
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    background: var(--paper);
-  }
-  .cal-cell.am { border-bottom: 1px dashed rgba(0,0,0,0.18); }
-  .cal-cell.pm { border-bottom: 1px solid var(--line); }
-  .cal-cell.weekend {
-    background: repeating-linear-gradient(45deg, var(--paper), var(--paper) 3px, rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 4px);
-  }
-
-  .cal-exam {
-    flex: 1;
-    width: 100%;
+    justify-content: center;
+    padding: 3px 5px;
     background: var(--ink);
     color: var(--paper);
-    padding: 3px 4px;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
     line-height: 1.15;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 0;
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .cal-exam.red { background: var(--red); }
-  .cal-exam .s {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0;
-    font-weight: 900;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .cal-exam .s.cn { font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 10px; }
-  .cal-exam .p {
-    opacity: 0.88;
-    font-size: 8px;
-    margin-top: 1px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     letter-spacing: 0.02em;
+    overflow: hidden;
+    border-right: 1px solid var(--paper);
   }
-  .cal-exam .p.second { margin-top: 0; padding-top: 1px; border-top: 1px solid rgba(255,255,255,0.25); }
-
-  .cal-legend {
-    margin-top: 16px;
-    display: flex;
-    gap: 22px;
-    flex-wrap: wrap;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    align-items: center;
-  }
-  .cal-legend .sw {
-    display: inline-block;
-    width: 22px; height: 11px;
-    border: 1px solid var(--line);
-    margin-right: 6px;
-    vertical-align: middle;
-  }
-  .cal-legend .sw.bk { background: var(--ink); }
-  .cal-legend .sw.rd { background: var(--red); border-color: var(--red); }
-  .cal-legend .sw.we { background: repeating-linear-gradient(45deg, var(--paper), var(--paper) 3px, rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 4px); }
+  .tl-exam.red { background: var(--red); }
+  .tl-exam .subj { font-weight: 700; font-size: 10px; letter-spacing: 0.05em; }
+  .tl-exam .paper { opacity: 0.85; }
 
   /* ========== SECTION 04: SUBJECT MATRIX ========== */
   .subj-matrix {
@@ -939,11 +864,11 @@
       </div>
       <div class="masthead-meta-row">
         <span>TOTAL PAPERS</span>
-        <span class="meta-num">60</span>
+        <span class="meta-num">59</span>
       </div>
       <div class="masthead-meta-row">
         <span>COMBINED HOURS</span>
-        <span class="meta-num">91<span style="font-size:14px;">¼</span></span>
+        <span class="meta-num">89<span style="font-size:14px;">½</span></span>
       </div>
       <div class="masthead-meta-row">
         <span>WINDOW</span>
@@ -999,7 +924,7 @@
 
     <!-- JOE -->
     <div class="reg-card">
-      <span class="reg-chip">FEWEST PAPERS</span>
+      <span class="reg-chip">TIED FEWEST</span>
       <div class="reg-head">
         <div class="reg-index">CAND / 02</div>
       </div>
@@ -1033,18 +958,18 @@
 
     <!-- MILL -->
     <div class="reg-card">
-      <span class="reg-chip red">LONGEST TOTAL</span>
+      <span class="reg-chip">TIED FEWEST</span>
       <div class="reg-head">
         <div class="reg-index">CAND / 03</div>
       </div>
       <div class="reg-name">MILL<span class="dot">.</span></div>
       <div class="reg-stats" style="margin-top: 14px;">
         <div class="reg-stat">
-          <div class="reg-stat-num">15<span class="u">pp</span></div>
+          <div class="reg-stat-num">14<span class="u">pp</span></div>
           <div class="reg-stat-lbl">Papers</div>
         </div>
         <div class="reg-stat">
-          <div class="reg-stat-num">24<span class="u">h 00</span></div>
+          <div class="reg-stat-num">22<span class="u">h 15</span></div>
           <div class="reg-stat-lbl">Total time</div>
         </div>
         <div class="reg-stat">
@@ -1060,7 +985,7 @@
         <b>Subjects</b>
         中文A 语言与文学 SL<br>
         物理 HL · 商管 SL<br>
-        English B HL · 经济 HL<br>
+        English B HL · 经济 SL<br>
         Math AA HL
       </div>
     </div>
@@ -1129,26 +1054,17 @@
     </div>
   </div>
 
-  <!-- ========== SECTION 03: CALENDAR GRID ========== -->
+  <!-- ========== SECTION 03: TIMELINES ========== -->
   <div class="section-head">
     <div class="section-num">0<span>3</span></div>
     <div class="section-title">
-      <h2>CALENDAR / 日历对照</h2>
-      <div class="cn">24 天 × 4 考生。上下两行为每日上午/下午。方块落位 = 该日期该时段的考试。红色 = 同场次双卷或同日双考。斜纹 = 周末。</div>
+      <h2>TIMELINE / 个体时序</h2>
+      <div class="cn">每位考生的试卷在 24 天窗口内的分布。红色代表同日双考或同场次双卷。</div>
     </div>
-    <div class="section-rule">24 COLS × 8 ROWS</div>
+    <div class="section-rule">N=4 TRACKS</div>
   </div>
 
-  <div class="cal-wrap">
-    <div class="cal" id="cal"></div>
-
-    <div class="cal-legend">
-      <span><span class="sw bk"></span>SINGLE / 普通单卷</span>
-      <span><span class="sw rd"></span>DOUBLE / 同场双卷或同日双考</span>
-      <span><span class="sw we"></span>WEEKEND / 周末空档</span>
-      <span style="margin-left:auto;">DASH = AM/PM 内分隔 · SOLID = 日分隔</span>
-    </div>
-  </div>
+  <div class="timelines" id="timelines"></div>
 
   <!-- ========== SECTION 04: SUBJECT MATRIX ========== -->
   <div class="section-head">
@@ -1193,16 +1109,16 @@
       <div class="subj-name">Economics<span class="lvl hl">HL</span></div>
       <div class="cell-yes hl">■</div>
       <div class="cell-no">·</div>
+      <div class="cell-no">·</div>
       <div class="cell-yes hl">■</div>
-      <div class="cell-yes hl">■</div>
-      <div class="cell-total">3</div>
+      <div class="cell-total">2</div>
 
       <div class="subj-name">Economics<span class="lvl">SL</span></div>
       <div class="cell-no">·</div>
       <div class="cell-yes sl">●</div>
+      <div class="cell-yes sl">●</div>
       <div class="cell-no">·</div>
-      <div class="cell-no">·</div>
-      <div class="cell-total">1</div>
+      <div class="cell-total">2</div>
 
       <div class="subj-name">Chemistry<span class="lvl">SL</span></div>
       <div class="cell-yes sl">●</div>
@@ -1301,18 +1217,18 @@
     <div class="int-col">
       <div class="int-title">MILL</div>
       <div class="int-bar-grp">
-        <div class="int-bar-label">Papers / Exam day <strong>1.36</strong></div>
-        <div class="int-bar"><div class="int-bar-fill" style="width:91%"></div></div>
+        <div class="int-bar-label">Papers / Exam day <strong>1.27</strong></div>
+        <div class="int-bar"><div class="int-bar-fill" style="width:85%"></div></div>
       </div>
       <div class="int-bar-grp">
-        <div class="int-bar-label">Minutes / Exam day <strong>131</strong></div>
-        <div class="int-bar"><div class="int-bar-fill red" style="width:100%"></div></div>
+        <div class="int-bar-label">Minutes / Exam day <strong>121</strong></div>
+        <div class="int-bar"><div class="int-bar-fill red" style="width:91%"></div></div>
       </div>
       <div class="int-phases">
         <div class="int-phase"><span>前段</span><div class="int-phase-bar"><div class="int-phase-fill peak" style="width:100%"></div></div><span>158m</span></div>
         <div class="int-phase"><span>缓冲</span><div class="int-phase-bar"><div class="int-phase-fill rest"></div></div><span>0</span></div>
-        <div class="int-phase"><span>中后段</span><div class="int-phase-bar"><div class="int-phase-fill" style="width:48%"></div></div><span>70m</span></div>
-        <div class="int-phase"><span>末段</span><div class="int-phase-bar"><div class="int-phase-fill" style="width:45%"></div></div><span>64m</span></div>
+        <div class="int-phase"><span>中后段</span><div class="int-phase-bar"><div class="int-phase-fill" style="width:36%"></div></div><span>56m</span></div>
+        <div class="int-phase"><span>末段</span><div class="int-phase-bar"><div class="int-phase-fill" style="width:28%"></div></div><span>45m</span></div>
       </div>
     </div>
 
@@ -1416,9 +1332,9 @@
     <div>
       <div class="big" style="color:var(--red);">KEY OBSERVATIONS</div>
       一、四人皆 11 个考试日；总量由 14 至 16 张卷不等<br>
-      二、Mill 总时长最高（24h），起步最重<br>
+      二、Mill 修正后降至 14 张卷 / 22h15，但起步仍最重<br>
       三、Alice/Joe/Rain 末段压力更集中<br>
-      四、05/13、05/15 为跨人共同高峰日
+      四、04/28、05/07、05/15 为跨人共同高压日
     </div>
     <div>
       <div class="big">FOR REVIEW</div>
@@ -1435,7 +1351,7 @@
 // ========== DATA ==========
 const DAYS = [
   ['04/27','MON','first'],['04/28','TUE',''],['04/29','WED',''],['04/30','THU',''],
-  ['05/01','FRI','weekend'],['05/02','SAT','weekend'],['05/03','SUN','weekend'],
+  ['05/01','FRI',''],['05/02','SAT','weekend'],['05/03','SUN','weekend'],
   ['05/04','MON',''],['05/05','TUE',''],['05/06','WED',''],
   ['05/07','THU',''],['05/08','FRI',''],
   ['05/09','SAT','weekend'],['05/10','SUN','weekend'],
@@ -1448,13 +1364,13 @@ const DAYS = [
 // Format: [papers, minutes]
 const ALICE = [[1,75],[1,105],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[2,150],[1,60],[0,0],[0,0],[0,0],[1,105],[2,180],[1,120],[2,210],[0,0],[0,0],[1,90],[2,135],[2,120]];
 const JOE   = [[1,75],[2,195],[1,90],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[2,150],[1,60],[0,0],[0,0],[0,0],[1,105],[1,75],[1,120],[2,240],[0,0],[0,0],[1,150],[0,0],[1,75]];
-const MILL  = [[1,75],[2,225],[2,240],[1,90],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[2,150],[1,60],[0,0],[0,0],[0,0],[1,105],[2,180],[1,120],[1,120],[0,0],[0,0],[0,0],[0,0],[1,75]];
+const MILL  = [[1,75],[2,225],[2,240],[1,90],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[2,150],[1,60],[0,0],[0,0],[0,0],[1,105],[1,75],[1,120],[1,120],[0,0],[0,0],[0,0],[0,0],[1,75]];
 const RAIN  = [[1,75],[2,195],[1,90],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[2,150],[1,60],[0,0],[0,0],[0,0],[1,105],[2,180],[1,120],[2,210],[0,0],[0,0],[1,90],[0,0],[1,75]];
 
 const STUDENTS = [
   {name:'ALICE', idx:'01', data:ALICE, peak:18, total:'16 / 22h30'},
   {name:'JOE',   idx:'02', data:JOE,   peak:18, total:'14 / 22h15'},
-  {name:'MILL',  idx:'03', data:MILL,  peak:2,  total:'15 / 24h00'},
+  {name:'MILL',  idx:'03', data:MILL,  peak:2,  total:'14 / 22h15'},
   {name:'RAIN',  idx:'04', data:RAIN,  peak:18, total:'15 / 22h30'},
 ];
 
@@ -1540,170 +1456,139 @@ function formatTimeFull(mins) {
 }
 
 // ========== BUILD TIMELINES ==========
-// slots: [dayIndex, 'AM'|'PM', [ {s,p,t} ... ], redFlag ]
-const CAL = {
-  ALICE: {
-    meta: '16 papers · 22h30m',
-    slots: [
-      [0,'PM',[{s:'中文A',cn:true,p:'P1 1h15'}],false],
-      [1,'AM',[{s:'中文A',cn:true,p:'P2 1h45'}],false],
-      [10,'PM',[{s:'Eng B',p:'P1 1h30'},{s:'Eng B',p:'P2R 1h'}],true],
-      [11,'AM',[{s:'Eng B',p:'P2L 1h'}],false],
-      [15,'PM',[{s:'Econ',p:'P2 1h45'}],false],
-      [16,'AM',[{s:'Econ',p:'P1 1h15'},{s:'Econ',p:'P3 1h45'}],true],
-      [17,'PM',[{s:'Math',p:'P1 2h'}],false],
-      [18,'AM',[{s:'Math',p:'P2 2h'}],true],
-      [18,'PM',[{s:'Chem',p:'P1 1h30'}],true],
-      [21,'AM',[{s:'Chem',p:'P2 1h30'}],false],
-      [22,'PM',[{s:'Fr B',p:'P1 1h15'},{s:'Fr B',p:'P2R 1h'}],true],
-      [23,'AM',[{s:'Fr B',p:'P2L 45m'}],true],
-      [23,'PM',[{s:'Math',p:'P3 1h15'}],true],
-    ],
-  },
-  JOE: {
-    meta: '14 papers · 22h15m',
-    slots: [
-      [0,'PM',[{s:'中文A',cn:true,p:'P1 1h15'}],false],
-      [1,'AM',[{s:'中文A',cn:true,p:'P2 1h45'}],true],
-      [1,'PM',[{s:'Phys',p:'P1 1h30'}],true],
-      [2,'AM',[{s:'Phys',p:'P2 1h30'}],false],
-      [10,'PM',[{s:'Eng B',p:'P1 1h30'},{s:'Eng B',p:'P2R 1h'}],true],
-      [11,'AM',[{s:'Eng B',p:'P2L 1h'}],false],
-      [15,'PM',[{s:'Econ',p:'P2 1h45'}],false],
-      [16,'AM',[{s:'Econ',p:'P1 1h15'}],false],
-      [17,'PM',[{s:'Math',p:'P1 2h'}],false],
-      [18,'AM',[{s:'Math',p:'P2 2h'}],true],
-      [18,'PM',[{s:'Chem',p:'P1 2h'}],true],
-      [21,'AM',[{s:'Chem',p:'P2 2h30'}],false],
-      [23,'PM',[{s:'Math',p:'P3 1h15'}],false],
-    ],
-  },
-  MILL: {
-    meta: '15 papers · 24h00m',
-    slots: [
-      [0,'PM',[{s:'中文A',cn:true,p:'P1 1h15'}],false],
-      [1,'AM',[{s:'中文A',cn:true,p:'P2 1h45'}],true],
-      [1,'PM',[{s:'Phys',p:'P1 2h'}],true],
-      [2,'AM',[{s:'Phys',p:'P2 2h30'}],true],
-      [2,'PM',[{s:'BM',p:'P1 1h30'}],true],
-      [3,'AM',[{s:'BM',p:'P2 1h30'}],false],
-      [10,'PM',[{s:'Eng B',p:'P1 1h30'},{s:'Eng B',p:'P2R 1h'}],true],
-      [11,'AM',[{s:'Eng B',p:'P2L 1h'}],false],
-      [15,'PM',[{s:'Econ',p:'P2 1h45'}],false],
-      [16,'AM',[{s:'Econ',p:'P1 1h15'},{s:'Econ',p:'P3 1h45'}],true],
-      [17,'PM',[{s:'Math',p:'P1 2h'}],false],
-      [18,'AM',[{s:'Math',p:'P2 2h'}],false],
-      [23,'PM',[{s:'Math',p:'P3 1h15'}],false],
-    ],
-  },
-  RAIN: {
-    meta: '15 papers · 22h30m',
-    slots: [
-      [0,'PM',[{s:'中文A',cn:true,p:'P1 1h15'}],false],
-      [1,'AM',[{s:'中文A',cn:true,p:'P2 1h45'}],true],
-      [1,'PM',[{s:'Phys',p:'P1 1h30'}],true],
-      [2,'AM',[{s:'Phys',p:'P2 1h30'}],false],
-      [10,'PM',[{s:'Eng B',p:'P1 1h30'},{s:'Eng B',p:'P2R 1h'}],true],
-      [11,'AM',[{s:'Eng B',p:'P2L 1h'}],false],
-      [15,'PM',[{s:'Econ',p:'P2 1h45'}],false],
-      [16,'AM',[{s:'Econ',p:'P1 1h15'},{s:'Econ',p:'P3 1h45'}],true],
-      [17,'PM',[{s:'Math',p:'P1 2h'}],false],
-      [18,'AM',[{s:'Math',p:'P2 2h'}],true],
-      [18,'PM',[{s:'Chem',p:'P1 1h30'}],true],
-      [21,'AM',[{s:'Chem',p:'P2 1h30'}],false],
-      [23,'PM',[{s:'Math',p:'P3 1h15'}],false],
-    ],
-  },
+// Each exam: [day_index, am_or_pm_string, subject, paper, duration, red]
+const TL_DATA = {
+  ALICE: [
+    [0,'PM','中文A SL','P1','1h15',false],
+    [1,'AM','中文A SL','P2','1h45',false],
+    [10,'PM','English B HL','P1','1h30',true],
+    [10,'PM2','English B HL','P2R','1h',true],
+    [11,'AM','English B HL','P2L','1h',false],
+    [15,'PM','Econ HL','P2','1h45',false],
+    [16,'AM','Econ HL','P1','1h15',true],
+    [16,'AM2','Econ HL','P3','1h45',true],
+    [17,'PM','Math AA HL','P1','2h',false],
+    [18,'AM','Math AA HL','P2','2h',true],
+    [18,'PM','Chem SL','P1','1h30',true],
+    [21,'AM','Chem SL','P2','1h30',false],
+    [22,'PM','French B SL','P1','1h15',true],
+    [22,'PM2','French B SL','P2R','1h',true],
+    [23,'AM','French B SL','P2L','45m',true],
+    [23,'PM','Math AA HL','P3','1h15',true],
+  ],
+  JOE: [
+    [0,'PM','中文A SL','P1','1h15',false],
+    [1,'AM','中文A SL','P2','1h45',true],
+    [1,'PM','Physics SL','P1','1h30',true],
+    [2,'AM','Physics SL','P2','1h30',false],
+    [10,'PM','English B HL','P1','1h30',true],
+    [10,'PM2','English B HL','P2R','1h',true],
+    [11,'AM','English B HL','P2L','1h',false],
+    [15,'PM','Econ SL','P2','1h45',false],
+    [16,'AM','Econ SL','P1','1h15',false],
+    [17,'PM','Math AA HL','P1','2h',false],
+    [18,'AM','Math AA HL','P2','2h',true],
+    [18,'PM','Chem HL','P1','2h',true],
+    [21,'AM','Chem HL','P2','2h30',false],
+    [23,'PM','Math AA HL','P3','1h15',false],
+  ],
+  MILL: [
+    [0,'PM','中文A SL','P1','1h15',false],
+    [1,'AM','中文A SL','P2','1h45',true],
+    [1,'PM','Physics HL','P1','2h',true],
+    [2,'AM','Physics HL','P2','2h30',true],
+    [2,'PM','商管 SL','P1','1h30',true],
+    [3,'AM','商管 SL','P2','1h30',false],
+    [10,'PM','English B HL','P1','1h30',true],
+    [10,'PM2','English B HL','P2R','1h',true],
+    [11,'AM','English B HL','P2L','1h',false],
+    [15,'PM','Econ SL','P2','1h45',false],
+    [16,'AM','Econ SL','P1','1h15',false],
+    [17,'PM','Math AA HL','P1','2h',false],
+    [18,'AM','Math AA HL','P2','2h',false],
+    [23,'PM','Math AA HL','P3','1h15',false],
+  ],
+  RAIN: [
+    [0,'PM','中文A SL','P1','1h15',false],
+    [1,'AM','中文A SL','P2','1h45',true],
+    [1,'PM','Physics SL','P1','1h30',true],
+    [2,'AM','Physics SL','P2','1h30',false],
+    [10,'PM','English B HL','P1','1h30',true],
+    [10,'PM2','English B HL','P2R','1h',true],
+    [11,'AM','English B HL','P2L','1h',false],
+    [15,'PM','Econ HL','P2','1h45',false],
+    [16,'AM','Econ HL','P1','1h15',true],
+    [16,'AM2','Econ HL','P3','1h45',true],
+    [17,'PM','Math AA HL','P1','2h',false],
+    [18,'AM','Math AA HL','P2','2h',true],
+    [18,'PM','Chem SL','P1','1h30',true],
+    [21,'AM','Chem SL','P2','1h30',false],
+    [23,'PM','Math AA HL','P3','1h15',false],
+  ],
 };
 
-function buildCalendar() {
-  const cal = document.getElementById('cal');
-  cal.innerHTML = '';
+function buildTimelines() {
+  const container = document.getElementById('timelines');
+  container.innerHTML = '';
+  Object.keys(TL_DATA).forEach(name => {
+    const row = document.createElement('div');
+    row.className = 'tl-row';
 
-  // Corner (spans cols 1-2)
-  const corner = document.createElement('div');
-  corner.className = 'cal-corner';
-  corner.innerHTML = 'CAND ↓ / DATE →';
-  cal.appendChild(corner);
+    const stu = STUDENTS.find(s => s.name === name);
 
-  // Date headers
-  DAYS.forEach(([d, dow, cls]) => {
-    const cell = document.createElement('div');
-    cell.className = 'cal-date ' + cls;
-    cell.innerHTML = `<div class="cal-date-d">${d}</div><div class="cal-date-dow">${dow}</div>`;
-    cal.appendChild(cell);
-  });
+    row.innerHTML = `
+      <div class="tl-label">
+        <div class="name">${name}</div>
+        <div class="meta">${stu.total}</div>
+      </div>
+      <div class="tl-track">
+        <div class="tl-axis"></div>
+      </div>
+    `;
+    const axis = row.querySelector('.tl-axis');
 
-  // Helper: render a slot's exams into a cell
-  function renderSlot(cell, slot) {
-    if (!slot) return;
-    const [, , exams, red] = slot;
-    // Merge into single block. Subject shown once (same subject per time slot per IB).
-    const ex = document.createElement('div');
-    ex.className = 'cal-exam' + (red ? ' red' : '');
-    const subj = exams[0].s;
-    const isCn = exams[0].cn;
-    let html = `<div class="s${isCn ? ' cn' : ''}">${subj}</div>`;
-    exams.forEach((e, i) => {
-      html += `<div class="p${i > 0 ? ' second' : ''}">${e.p}</div>`;
+    // Build axis ticks
+    DAYS.forEach((d, i) => {
+      const t = document.createElement('div');
+      t.className = 'tl-tick' + ((d[1]==='MON'||i===0||i===23)?' major':'');
+      t.style.left = ((i + 0.5) / 24 * 100) + '%';
+      axis.appendChild(t);
+      if (d[1]==='MON'||i===0||i===23) {
+        const lbl = document.createElement('div');
+        lbl.className = 'tl-tick-lbl';
+        lbl.style.left = ((i + 0.5) / 24 * 100) + '%';
+        lbl.textContent = d[0];
+        axis.appendChild(lbl);
+      }
     });
-    ex.innerHTML = html;
-    cell.appendChild(ex);
-  }
 
-  // Student blocks
-  let row = 2;
-  Object.entries(CAL).forEach(([name, info]) => {
-    // Label (col 1, span 2 rows)
-    const lbl = document.createElement('div');
-    lbl.className = 'cal-lbl';
-    lbl.style.gridColumn = '1';
-    lbl.style.gridRow = `${row} / span 2`;
-    lbl.innerHTML = `<div class="n">${name}</div><div class="m">${info.meta}</div>`;
-    cal.appendChild(lbl);
+    // Build exam blocks
+    const track = row.querySelector('.tl-track');
+    TL_DATA[name].forEach(ex => {
+      const [di, slot, subj, paper, dur, isRed] = ex;
+      const el = document.createElement('div');
+      const slotBottom = {
+        PM: 0,
+        AM2: 0,
+        AM: 48,
+        PM2: 48,
+      };
+      el.className = 'tl-exam' + (isRed ? ' red' : '');
+      const widthPct = (1 / 24) * 100 * 0.88;
+      const leftPct = ((di + 0.06) / 24) * 100;
+      el.style.left = `${leftPct}%`;
+      el.style.width = `${widthPct}%`;
+      el.style.bottom = `${slotBottom[slot] ?? 0}px`;
+      el.innerHTML = `<div class="subj">${subj}</div><div class="paper">${paper} · ${dur}</div>`;
+      track.appendChild(el);
+    });
 
-    // AM label
-    const amLbl = document.createElement('div');
-    amLbl.className = 'cal-slot-lbl am';
-    amLbl.style.gridColumn = '2';
-    amLbl.style.gridRow = `${row}`;
-    amLbl.textContent = 'AM';
-    cal.appendChild(amLbl);
-
-    // AM cells
-    for (let d = 0; d < 24; d++) {
-      const c = document.createElement('div');
-      c.className = 'cal-cell am' + (DAYS[d][2] === 'weekend' ? ' weekend' : '');
-      c.style.gridColumn = `${3 + d}`;
-      c.style.gridRow = `${row}`;
-      renderSlot(c, info.slots.find(s => s[0] === d && s[1] === 'AM'));
-      cal.appendChild(c);
-    }
-
-    // PM label
-    const pmLbl = document.createElement('div');
-    pmLbl.className = 'cal-slot-lbl pm';
-    pmLbl.style.gridColumn = '2';
-    pmLbl.style.gridRow = `${row + 1}`;
-    pmLbl.textContent = 'PM';
-    cal.appendChild(pmLbl);
-
-    // PM cells
-    for (let d = 0; d < 24; d++) {
-      const c = document.createElement('div');
-      c.className = 'cal-cell pm' + (DAYS[d][2] === 'weekend' ? ' weekend' : '');
-      c.style.gridColumn = `${3 + d}`;
-      c.style.gridRow = `${row + 1}`;
-      renderSlot(c, info.slots.find(s => s[0] === d && s[1] === 'PM'));
-      cal.appendChild(c);
-    }
-
-    row += 2;
+    container.appendChild(row);
   });
 }
 
 buildMatrix();
-buildCalendar();
+buildTimelines();
 </script>
 
 </body>
