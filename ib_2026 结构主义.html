@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 MAY IB / 外部笔试对照矩阵</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EFE8DA;
+    --paper-2: #E6DEC9;
+    --ink: #0C0C0C;
+    --ink-soft: #232323;
+    --red: #D63321;
+    --red-deep: #A0241A;
+    --muted: #8C8476;
+    --line: #0C0C0C;
+    --accent: #1C3D2E;
+    --cell-0: rgba(12,12,12,0.00);
+    --cell-1: rgba(12,12,12,0.08);
+    --cell-2: rgba(12,12,12,0.22);
+    --cell-3: rgba(12,12,12,0.44);
+    --cell-4: rgba(214,51,33,0.72);
+    --cell-5: rgba(214,51,33,1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Archivo', 'Noto Serif SC', sans-serif;
+    font-feature-settings: "tnum" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-image:
+      radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+      radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 1px 1px;
+  }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .display { font-family: 'Archivo Black', sans-serif; letter-spacing: -0.02em; }
+  .cjk { font-family: 'Noto Serif SC', serif; }
+
+  /* ========== LAYOUT ========== */
+  .sheet {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 24px 28px 80px;
+    position: relative;
+  }
+  .sheet::before {
+    content: '';
+    position: absolute;
+    top: 24px; bottom: 80px;
+    left: 28px; right: 28px;
+    border: 1px solid var(--line);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .sheet > * { position: relative; z-index: 1; }
+
+  /* ========== TOP STRIP ========== */
+  .strip-top {
+    display: grid;
+    grid-template-columns: 120px 1fr 1fr 1fr 120px;
+    border-bottom: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .strip-top > div {
+    padding: 10px 14px;
+    border-right: 1px solid var(--line);
+  }
+  .strip-top > div:last-child { border-right: none; }
+  .strip-top .red { color: var(--red); font-weight: 700; }
+
+  /* ========== MASTHEAD ========== */
+  .masthead {
+    display: grid;
+    grid-template-columns: 120px 1fr 180px;
+    border-bottom: 1px solid var(--line);
+    min-height: 280px;
+  }
+  .masthead-side {
+    border-right: 1px solid var(--line);
+    padding: 16px 14px;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .masthead-main {
+    padding: 28px 36px;
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .masthead-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 142px;
+    line-height: 0.88;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+  }
+  .masthead-title .red { color: var(--red); }
+  .masthead-title .slash { color: var(--muted); font-weight: 400; padding: 0 4px; }
+  .masthead-sub {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .masthead-sub-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .masthead-meta {
+    padding: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .masthead-meta-row {
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--line);
+    display: flex;
+    justify-content: space-between;
+  }
+  .masthead-meta-row:last-child { border-bottom: none; }
+  .meta-num { font-size: 28px; font-family: 'Archivo Black', sans-serif; line-height: 1; }
+
+  /* ========== SECTION HEADER ========== */
+  .section-head {
+    display: grid;
+    grid-template-columns: 120px 1fr 180px;
+    border-bottom: 1px solid var(--line);
+    align-items: stretch;
+  }
+  .section-num {
+    border-right: 1px solid var(--line);
+    padding: 14px;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 44px;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .section-num span { color: var(--red); }
+  .section-title {
+    padding: 14px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--line);
+  }
+  .section-title h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 30px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+  .section-title .cn {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 700;
+    font-size: 14px;
+    margin-top: 6px;
+    color: var(--ink-soft);
+  }
+  .section-rule {
+    padding: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  /* ========== SECTION 01 REGISTRY ========== */
+  .registry {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--line);
+  }
+  .reg-card {
+    border-right: 1px solid var(--line);
+    padding: 18px 16px 14px;
+    position: relative;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+  }
+  .reg-card:last-child { border-right: none; }
+  .reg-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+  }
+  .reg-index {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+  }
+  .reg-name {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 42px;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+  .reg-name .dot { color: var(--red); }
+  .reg-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-bottom: 14px;
+  }
+  .reg-stat {
+    padding: 10px 0 10px;
+    border-right: 1px dashed var(--line);
+  }
+  .reg-stat:nth-child(2n) { border-right: none; padding-left: 10px; }
+  .reg-stat:nth-child(-n+2) { border-bottom: 1px dashed var(--line); }
+  .reg-stat-num {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 34px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .reg-stat-num .u { font-size: 14px; color: var(--muted); font-weight: 400; margin-left: 3px; font-family: 'JetBrains Mono', monospace; }
+  .reg-stat-lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .reg-subj {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.5;
+    border-top: 1px solid var(--line);
+    padding-top: 10px;
+    margin-top: auto;
+  }
+  .reg-subj b { font-weight: 700; display: block; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+
+  /* Student corner chip */
+  .reg-chip {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3px 7px;
+    text-transform: uppercase;
+  }
+  .reg-chip.red { background: var(--red); }
+
+  /* ========== SECTION 02: MATRIX ========== */
+  .matrix-wrap {
+    border-bottom: 1px solid var(--line);
+    padding: 24px 28px;
+  }
+  .matrix {
+    display: grid;
+    grid-template-columns: 110px repeat(24, 1fr) 90px;
+    border: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .matrix .mh {
+    padding: 6px 4px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    background: var(--paper-2);
+    min-height: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  .matrix .mh.weekend { background: #DCD4BD; }
+  .matrix .mh.first, .matrix .mh.last { background: var(--ink); color: var(--paper); }
+  .matrix .mh-date {
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'Archivo', sans-serif;
+  }
+  .matrix .mh-dow {
+    font-size: 8px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+  }
+  .matrix .mh.first .mh-dow, .matrix .mh.last .mh-dow { color: var(--paper); opacity: 0.7; }
+  .matrix .mh.weekend .mh-dow { color: var(--ink); opacity: 0.6; }
+  .matrix .mh-corner {
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 700;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .matrix .mh-tot {
+    background: var(--paper-2);
+    font-weight: 700;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .matrix .mc {
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    min-height: 72px;
+    padding: 4px 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    font-size: 10px;
+  }
+  .matrix .mc.weekend { background: repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(0,0,0,0.04) 4px, rgba(0,0,0,0.04) 5px); }
+  .matrix .mc-name {
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 8px 12px;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--ink);
+    color: var(--paper);
+    min-height: 72px;
+  }
+  .matrix .mc-name .idx { font-size: 9px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.15em; color: var(--paper); opacity: 0.6; font-weight: 400; }
+  .matrix .mc-tot {
+    border-bottom: 1px solid var(--line);
+    padding: 4px;
+    background: var(--paper-2);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 72px;
+  }
+  .matrix .mc-tot small {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+  .matrix .last-row > * { border-bottom: none; }
+
+  .cell-fill {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .cell-papers {
+    position: relative;
+    z-index: 1;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 18px;
+    line-height: 1;
+  }
+  .cell-mins {
+    position: relative;
+    z-index: 1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    opacity: 0.7;
+  }
+  .cell-heavy .cell-papers, .cell-heavy .cell-mins { color: white; }
+  .cell-heavy .cell-mins { opacity: 0.85; }
+  .cell-peak::after {
+    content: '';
+    position: absolute;
+    top: 2px; right: 2px;
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+  .matrix-legend {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-top: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .matrix-legend .scale {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  .matrix-legend .scale-box {
+    width: 18px;
+    height: 12px;
+    border: 1px solid var(--line);
+  }
+  .matrix-legend .peak-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--red);
+    display: inline-block;
+    margin-right: 6px;
+  }
+
+  /* ========== SECTION 03: CALENDAR GRID ========== */
+  .cal-wrap { padding: 24px 28px; border-bottom: 1px solid var(--line); }
+  .cal {
+    display: grid;
+    grid-template-columns: 96px 32px repeat(24, minmax(0, 1fr));
+    font-family: 'JetBrains Mono', monospace;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .cal-corner {
+    grid-column: 1 / 3;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 8px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .cal-date {
+    padding: 4px 2px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--paper-2);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 44px;
+  }
+  .cal-date.weekend { background: #DCD4BD; }
+  .cal-date.first, .cal-date.last { background: var(--ink); color: var(--paper); }
+  .cal-date.peak-col { background: var(--red); color: var(--paper); }
+  .cal-date-d { font-size: 11px; font-weight: 700; font-family: 'Archivo', sans-serif; line-height: 1; }
+  .cal-date-dow { font-size: 8px; color: var(--muted); margin-top: 3px; letter-spacing: 0.12em; }
+  .cal-date.first .cal-date-dow,
+  .cal-date.last .cal-date-dow,
+  .cal-date.peak-col .cal-date-dow { color: var(--paper); opacity: 0.75; }
+
+  .cal-lbl {
+    grid-column: 1;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 10px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .cal-lbl .n {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 22px;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+  .cal-lbl .m {
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    margin-top: 8px;
+    opacity: 0.75;
+    text-transform: uppercase;
+  }
+
+  .cal-slot-lbl {
+    grid-column: 2;
+    background: var(--paper-2);
+    border-right: 1px solid var(--line);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink);
+  }
+  .cal-slot-lbl.am { border-bottom: 1px dashed rgba(0,0,0,0.25); }
+  .cal-slot-lbl.pm { border-bottom: 1px solid var(--line); }
+
+  .cal-cell {
+    border-right: 1px solid var(--line);
+    padding: 2px;
+    min-height: 48px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--paper);
+  }
+  .cal-cell.am { border-bottom: 1px dashed rgba(0,0,0,0.18); }
+  .cal-cell.pm { border-bottom: 1px solid var(--line); }
+  .cal-cell.weekend {
+    background: repeating-linear-gradient(45deg, var(--paper), var(--paper) 3px, rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 4px);
+  }
+
+  .cal-exam {
+    flex: 1;
+    width: 100%;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3px 4px;
+    font-size: 9px;
+    line-height: 1.15;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .cal-exam.red { background: var(--red); }
+  .cal-exam .s {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0;
+    font-weight: 900;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cal-exam .s.cn { font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 10px; }
+  .cal-exam .p {
+    opacity: 0.88;
+    font-size: 8px;
+    margin-top: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.02em;
+  }
+  .cal-exam .p.second { margin-top: 0; padding-top: 1px; border-top: 1px solid rgba(255,255,255,0.25); }
+
+  .cal-legend {
+    margin-top: 16px;
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    align-items: center;
+  }
+  .cal-legend .sw {
+    display: inline-block;
+    width: 22px; height: 11px;
+    border: 1px solid var(--line);
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .cal-legend .sw.bk { background: var(--ink); }
+  .cal-legend .sw.rd { background: var(--red); border-color: var(--red); }
+  .cal-legend .sw.we { background: repeating-linear-gradient(45deg, var(--paper), var(--paper) 3px, rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 4px); }
+
+  /* ========== SECTION 04: SUBJECT MATRIX ========== */
+  .subj-matrix {
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--line);
+  }
+  .subj-grid {
+    display: grid;
+    grid-template-columns: 200px repeat(4, 1fr) 80px;
+    border: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+  }
+  .subj-grid > div {
+    padding: 10px 12px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .subj-grid > div:nth-child(6n) { border-right: none; }
+  .subj-grid .subj-head {
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    justify-content: center;
+    font-size: 11px;
+  }
+  .subj-grid .subj-name {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    font-weight: 700;
+    background: var(--paper-2);
+    letter-spacing: 0;
+    justify-content: flex-start;
+  }
+  .subj-grid .subj-name .lvl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2px 6px;
+    margin-left: 8px;
+    letter-spacing: 0.1em;
+  }
+  .subj-grid .subj-name .lvl.hl { background: var(--red); }
+  .subj-grid .cell-yes {
+    justify-content: center;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 14px;
+  }
+  .subj-grid .cell-yes.hl { background: var(--red); color: var(--paper); }
+  .subj-grid .cell-yes.sl { background: rgba(12,12,12,0.08); color: var(--ink); }
+  .subj-grid .cell-no {
+    justify-content: center;
+    color: var(--muted);
+  }
+  .subj-grid .cell-total {
+    background: var(--paper-2);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 16px;
+    justify-content: center;
+  }
+  .subj-grid > div.row-last { border-bottom: none; }
+
+  /* ========== SECTION 05: INTENSITY ========== */
+  .intensity {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--line);
+  }
+  .int-col {
+    border-right: 1px solid var(--line);
+    padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .int-col:last-child { border-right: none; }
+  .int-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 26px;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+  }
+  .int-bar-grp {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .int-bar-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .int-bar-label strong {
+    color: var(--ink);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+  }
+  .int-bar {
+    height: 10px;
+    background: var(--cell-1);
+    position: relative;
+    border: 1px solid var(--line);
+  }
+  .int-bar-fill {
+    height: 100%;
+    background: var(--ink);
+  }
+  .int-bar-fill.red { background: var(--red); }
+
+  .int-phases {
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .int-phase {
+    display: grid;
+    grid-template-columns: 70px 1fr 40px;
+    gap: 8px;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+  }
+  .int-phase-bar {
+    height: 14px;
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .int-phase-fill {
+    height: 100%;
+    background: var(--ink);
+  }
+  .int-phase-fill.rest { background: repeating-linear-gradient(45deg, var(--paper), var(--paper) 3px, var(--line) 3px, var(--line) 4px); }
+  .int-phase-fill.peak { background: var(--red); }
+
+  /* ========== SECTION 06: PEAK DAYS ========== */
+  .peaks {
+    border-bottom: 1px solid var(--line);
+    padding: 24px 28px;
+  }
+  .peak-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+  }
+  .peak-card {
+    border-right: 1px solid var(--line);
+    padding: 16px 16px 18px;
+    background: var(--paper);
+    position: relative;
+  }
+  .peak-card:last-child { border-right: none; }
+  .peak-card.critical { background: var(--red); color: var(--paper); }
+  .peak-card.critical .peak-lbl { color: var(--paper); opacity: 0.7; }
+  .peak-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid currentColor;
+  }
+  .peak-who {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+  .peak-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .peak-date {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 34px;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .peak-lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .peak-desc {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .peak-papers {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed currentColor;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+  }
+  .peak-papers .pp {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ========== FOOTER ========== */
+  .footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .footer > div {
+    padding: 18px 22px;
+    border-right: 1px solid var(--line);
+  }
+  .footer > div:last-child { border-right: none; }
+  .footer .big {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 22px;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  /* ========== CORNER TICKS ========== */
+  .corner {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+  }
+  .corner.tl { top: -1px; left: -1px; border-top: 2px solid var(--red); border-left: 2px solid var(--red); }
+  .corner.tr { top: -1px; right: -1px; border-top: 2px solid var(--red); border-right: 2px solid var(--red); }
+  .corner.bl { bottom: -1px; left: -1px; border-bottom: 2px solid var(--red); border-left: 2px solid var(--red); }
+  .corner.br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--red); border-right: 2px solid var(--red); }
+
+  @media (max-width: 1200px) {
+    .masthead-title { font-size: 98px; }
+    .matrix { grid-template-columns: 90px repeat(24, 1fr) 72px; font-size: 9px; }
+    .matrix .cell-papers { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <span class="corner tl"></span>
+  <span class="corner tr"></span>
+  <span class="corner bl"></span>
+  <span class="corner br"></span>
+
+  <!-- ========== TOP STRIP ========== -->
+  <div class="strip-top">
+    <div>DOC / REV.01</div>
+    <div>外部笔试 / EXTERNAL WRITTEN EXAMINATIONS</div>
+    <div>2026-04-27 → 2026-05-20</div>
+    <div>OBSERVATION WINDOW / 24 DAYS</div>
+    <div class="red">⬛ CONFIDENTIAL</div>
+  </div>
+
+  <!-- ========== MASTHEAD ========== -->
+  <div class="masthead">
+    <div class="masthead-side">
+      <span>STRUCTURALIST COMPARISON SHEET</span>
+      <span>IB-MAY-26 / N=4</span>
+    </div>
+    <div class="masthead-main">
+      <div>
+        <div class="masthead-title">
+          2026<span class="slash">/</span><span class="red">MAY</span><br>
+          IB&nbsp;EXAM<br>
+          MATRIX.
+        </div>
+      </div>
+      <div class="masthead-sub">
+        <div class="cjk">四名考生 / 笔试排期 / 密度对照 / 峰值标注</div>
+        <div class="masthead-sub-label">SHEET A / 01 OF 01</div>
+      </div>
+    </div>
+    <div class="masthead-meta">
+      <div class="masthead-meta-row">
+        <span>CANDIDATES</span>
+        <span class="meta-num">04</span>
+      </div>
+      <div class="masthead-meta-row">
+        <span>TOTAL PAPERS</span>
+        <span class="meta-num">60</span>
+      </div>
+      <div class="masthead-meta-row">
+        <span>COMBINED HOURS</span>
+        <span class="meta-num">91<span style="font-size:14px;">¼</span></span>
+      </div>
+      <div class="masthead-meta-row">
+        <span>WINDOW</span>
+        <span class="meta-num">24<span style="font-size:14px;color:var(--muted);">d</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SECTION 01: REGISTRY ========== -->
+  <div class="section-head">
+    <div class="section-num">0<span>1</span></div>
+    <div class="section-title">
+      <h2>REGISTRY / 考生索引</h2>
+      <div class="cn">基本参数。试卷数、总时长、科目组合、考试日。</div>
+    </div>
+    <div class="section-rule">§ I.A ~ I.D</div>
+  </div>
+
+  <div class="registry">
+    <!-- ALICE -->
+    <div class="reg-card">
+      <span class="reg-chip red">MAX PAPERS</span>
+      <div class="reg-head">
+        <div class="reg-index">CAND / 01</div>
+      </div>
+      <div class="reg-name">ALICE<span class="dot">.</span></div>
+      <div class="reg-stats" style="margin-top: 14px;">
+        <div class="reg-stat">
+          <div class="reg-stat-num">16<span class="u">pp</span></div>
+          <div class="reg-stat-lbl">Papers</div>
+        </div>
+        <div class="reg-stat">
+          <div class="reg-stat-num">22<span class="u">h 30</span></div>
+          <div class="reg-stat-lbl">Total time</div>
+        </div>
+        <div class="reg-stat">
+          <div class="reg-stat-num">11<span class="u">d</span></div>
+          <div class="reg-stat-lbl">Exam days</div>
+        </div>
+        <div class="reg-stat">
+          <div class="reg-stat-num">06<span class="u">sub</span></div>
+          <div class="reg-stat-lbl">Subjects</div>
+        </div>
+      </div>
+      <div class="reg-subj">
+        <b>Subjects</b>
+        中文A 语言与文学 SL<br>
+        English B HL · Economics HL<br>
+        Math AA HL · Chemistry SL<br>
+        French B SL
+      </div>
+    </div>
+
+    <!-- JOE -->
+    <div class="reg-card">
+      <span class="reg-chip">FEWEST PAPERS</span>
+      <div class="reg-head">
+        <div class="reg-index">CAND / 02</div>
+      </div>
+      <div class="reg-name">JOE<span class="dot">.</span></div>
+      <div class="reg-stats" style="margin-top: 14px;">
+        <div class="reg-stat">
+          <div class="reg-stat-num">14<span class="u">pp</span></div>
+          <div class="reg-stat-lbl">Papers</div>
+        </div>
+        <div class="reg-stat">
+          <div class="reg-stat-num">22<span class="u">h 15</span></div>
+          <div class="reg-stat-lbl">Total time</div>
+        </div>
+        <div class="reg-stat">
+          <div class="reg-stat-num">11<span class="u">d</span></div>
+          <div class="reg-stat-lbl">Exam days</div>
+        </div>
+        <div class="reg-stat">
+          <div class="reg-stat-num">06<span class="u">sub</span></div>
+          <div class="reg-stat-lbl">Subjects</div>
+        </div>
+      </div>
+      <div class="reg-subj">
+        <b>Subjects</b>
+        中文A 语言与文学 SL<br>
+        物理 SL · English B HL<br>
+        经济 SL · Math AA HL<br>
+        化学 HL
+      </div>
+    </div>
+
+    <!-- MILL -->
+    <div class="reg-card">
+      <span class="reg-chip red">LONGEST TOTAL</span>
+      <div class="reg-head">
+        <div class="reg-index">CAND / 03</div>
+      </div>
+      <div class="reg-name">MILL<span class="dot">.</span></div>
+      <div class="reg-stats" style="margin-top: 14px;">
+        <div class="reg-stat">
+          <div class="reg-stat-num">15<span class="u">pp</span></div>
+          <div class="reg-stat-lbl">Papers</div>
+        </div>
+        <div class="reg-stat">
+          <div class="reg-stat-num">24<span class="u">h 00</span></div>
+          <div class="reg-stat-lbl">Total time</div>
+        </div>
+        <div class="reg-stat">
+          <div class="reg-stat-num">11<span class="u">d</span></div>
+          <div class="reg-stat-lbl">Exam days</div>
+        </div>
+        <div class="reg-stat">
+          <div class="reg-stat-num">06<span class="u">sub</span></div>
+          <div class="reg-stat-lbl">Subjects</div>
+        </div>
+      </div>
+      <div class="reg-subj">
+        <b>Subjects</b>
+        中文A 语言与文学 SL<br>
+        物理 HL · 商管 SL<br>
+        English B HL · 经济 HL<br>
+        Math AA HL
+      </div>
+    </div>
+
+    <!-- RAIN -->
+    <div class="reg-card">
+      <span class="reg-chip">MEDIAN LOAD</span>
+      <div class="reg-head">
+        <div class="reg-index">CAND / 04</div>
+      </div>
+      <div class="reg-name">RAIN<span class="dot">.</span></div>
+      <div class="reg-stats" style="margin-top: 14px;">
+        <div class="reg-stat">
+          <div class="reg-stat-num">15<span class="u">pp</span></div>
+          <div class="reg-stat-lbl">Papers</div>
+        </div>
+        <div class="reg-stat">
+          <div class="reg-stat-num">22<span class="u">h 30</span></div>
+          <div class="reg-stat-lbl">Total time</div>
+        </div>
+        <div class="reg-stat">
+          <div class="reg-stat-num">11<span class="u">d</span></div>
+          <div class="reg-stat-lbl">Exam days</div>
+        </div>
+        <div class="reg-stat">
+          <div class="reg-stat-num">06<span class="u">sub</span></div>
+          <div class="reg-stat-lbl">Subjects</div>
+        </div>
+      </div>
+      <div class="reg-subj">
+        <b>Subjects</b>
+        中文A 语言与文学 SL<br>
+        物理 SL · English B HL<br>
+        经济 HL · Math AA HL<br>
+        化学 SL
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SECTION 02: MATRIX ========== -->
+  <div class="section-head">
+    <div class="section-num">0<span>2</span></div>
+    <div class="section-title">
+      <h2>DAILY MATRIX / 每日矩阵</h2>
+      <div class="cn">24 天考期的每日强度。每格顶部为试卷数，底部为当日考试分钟。填色按时长分级。红点标注个人峰值日。</div>
+    </div>
+    <div class="section-rule">ROWS × DAYS</div>
+  </div>
+
+  <div class="matrix-wrap">
+    <div class="matrix" id="matrix"></div>
+
+    <div class="matrix-legend">
+      <span>STRENGTH SCALE / 考试分钟：</span>
+      <div class="scale">
+        <div class="scale-box" style="background:var(--cell-0)"></div>
+        <div class="scale-box" style="background:var(--cell-1)"></div>
+        <div class="scale-box" style="background:var(--cell-2)"></div>
+        <div class="scale-box" style="background:var(--cell-3)"></div>
+        <div class="scale-box" style="background:var(--cell-4)"></div>
+        <div class="scale-box" style="background:var(--cell-5)"></div>
+      </div>
+      <span style="margin-left:4px;">0 → 60 → 120 → 180 → 240 MIN</span>
+      <span style="margin-left:20px;"><span class="peak-dot"></span>PERSONAL PEAK DAY / 本人峰值日</span>
+      <span style="margin-left:20px;">◩ WEEKEND / 周末空档</span>
+    </div>
+  </div>
+
+  <!-- ========== SECTION 03: CALENDAR GRID ========== -->
+  <div class="section-head">
+    <div class="section-num">0<span>3</span></div>
+    <div class="section-title">
+      <h2>CALENDAR / 日历对照</h2>
+      <div class="cn">24 天 × 4 考生。上下两行为每日上午/下午。方块落位 = 该日期该时段的考试。红色 = 同场次双卷或同日双考。斜纹 = 周末。</div>
+    </div>
+    <div class="section-rule">24 COLS × 8 ROWS</div>
+  </div>
+
+  <div class="cal-wrap">
+    <div class="cal" id="cal"></div>
+
+    <div class="cal-legend">
+      <span><span class="sw bk"></span>SINGLE / 普通单卷</span>
+      <span><span class="sw rd"></span>DOUBLE / 同场双卷或同日双考</span>
+      <span><span class="sw we"></span>WEEKEND / 周末空档</span>
+      <span style="margin-left:auto;">DASH = AM/PM 内分隔 · SOLID = 日分隔</span>
+    </div>
+  </div>
+
+  <!-- ========== SECTION 04: SUBJECT MATRIX ========== -->
+  <div class="section-head">
+    <div class="section-num">0<span>4</span></div>
+    <div class="section-title">
+      <h2>SUBJECT GRID / 科目矩阵</h2>
+      <div class="cn">科目与等级的对照。HL 红色块，SL 灰色块。末列为该科参考人数。</div>
+    </div>
+    <div class="section-rule">§ IV</div>
+  </div>
+
+  <div class="subj-matrix">
+    <div class="subj-grid">
+      <div class="subj-head" style="justify-content:flex-start;">Subject / 科目</div>
+      <div class="subj-head">Alice</div>
+      <div class="subj-head">Joe</div>
+      <div class="subj-head">Mill</div>
+      <div class="subj-head">Rain</div>
+      <div class="subj-head">Σ</div>
+
+      <div class="subj-name">中文A 语言与文学<span class="lvl">SL</span></div>
+      <div class="cell-yes sl">●</div>
+      <div class="cell-yes sl">●</div>
+      <div class="cell-yes sl">●</div>
+      <div class="cell-yes sl">●</div>
+      <div class="cell-total">4</div>
+
+      <div class="subj-name">English B<span class="lvl hl">HL</span></div>
+      <div class="cell-yes hl">■</div>
+      <div class="cell-yes hl">■</div>
+      <div class="cell-yes hl">■</div>
+      <div class="cell-yes hl">■</div>
+      <div class="cell-total">4</div>
+
+      <div class="subj-name">Math AA<span class="lvl hl">HL</span></div>
+      <div class="cell-yes hl">■</div>
+      <div class="cell-yes hl">■</div>
+      <div class="cell-yes hl">■</div>
+      <div class="cell-yes hl">■</div>
+      <div class="cell-total">4</div>
+
+      <div class="subj-name">Economics<span class="lvl hl">HL</span></div>
+      <div class="cell-yes hl">■</div>
+      <div class="cell-no">·</div>
+      <div class="cell-yes hl">■</div>
+      <div class="cell-yes hl">■</div>
+      <div class="cell-total">3</div>
+
+      <div class="subj-name">Economics<span class="lvl">SL</span></div>
+      <div class="cell-no">·</div>
+      <div class="cell-yes sl">●</div>
+      <div class="cell-no">·</div>
+      <div class="cell-no">·</div>
+      <div class="cell-total">1</div>
+
+      <div class="subj-name">Chemistry<span class="lvl">SL</span></div>
+      <div class="cell-yes sl">●</div>
+      <div class="cell-no">·</div>
+      <div class="cell-no">·</div>
+      <div class="cell-yes sl">●</div>
+      <div class="cell-total">2</div>
+
+      <div class="subj-name">Chemistry<span class="lvl hl">HL</span></div>
+      <div class="cell-no">·</div>
+      <div class="cell-yes hl">■</div>
+      <div class="cell-no">·</div>
+      <div class="cell-no">·</div>
+      <div class="cell-total">1</div>
+
+      <div class="subj-name">Physics<span class="lvl">SL</span></div>
+      <div class="cell-no">·</div>
+      <div class="cell-yes sl">●</div>
+      <div class="cell-no">·</div>
+      <div class="cell-yes sl">●</div>
+      <div class="cell-total">2</div>
+
+      <div class="subj-name">Physics<span class="lvl hl">HL</span></div>
+      <div class="cell-no">·</div>
+      <div class="cell-no">·</div>
+      <div class="cell-yes hl">■</div>
+      <div class="cell-no">·</div>
+      <div class="cell-total">1</div>
+
+      <div class="subj-name">Business Management<span class="lvl">SL</span></div>
+      <div class="cell-no">·</div>
+      <div class="cell-no">·</div>
+      <div class="cell-yes sl">●</div>
+      <div class="cell-no">·</div>
+      <div class="cell-total">1</div>
+
+      <div class="subj-name row-last">French B<span class="lvl">SL</span></div>
+      <div class="cell-yes sl row-last">●</div>
+      <div class="cell-no row-last">·</div>
+      <div class="cell-no row-last">·</div>
+      <div class="cell-no row-last">·</div>
+      <div class="cell-total row-last">1</div>
+    </div>
+  </div>
+
+  <!-- ========== SECTION 05: INTENSITY ========== -->
+  <div class="section-head">
+    <div class="section-num">0<span>5</span></div>
+    <div class="section-title">
+      <h2>INTENSITY / 密度参数</h2>
+      <div class="cn">按考试日均摊的日均试卷数与时长，以及阶段分段（考期开头、缓冲、中后段、末段）的日均时长对比。</div>
+    </div>
+    <div class="section-rule">DAILY AVG × PHASE</div>
+  </div>
+
+  <div class="intensity">
+    <!-- ALICE -->
+    <div class="int-col">
+      <div class="int-title">ALICE</div>
+      <div class="int-bar-grp">
+        <div class="int-bar-label">Papers / Exam day <strong>1.45</strong></div>
+        <div class="int-bar"><div class="int-bar-fill" style="width:97%"></div></div>
+      </div>
+      <div class="int-bar-grp">
+        <div class="int-bar-label">Minutes / Exam day <strong>123</strong></div>
+        <div class="int-bar"><div class="int-bar-fill red" style="width:93%"></div></div>
+      </div>
+      <div class="int-phases">
+        <div class="int-phase"><span>前段</span><div class="int-phase-bar"><div class="int-phase-fill" style="width:37%"></div></div><span>90m</span></div>
+        <div class="int-phase"><span>缓冲</span><div class="int-phase-bar"><div class="int-phase-fill rest"></div></div><span>0</span></div>
+        <div class="int-phase"><span>中后段</span><div class="int-phase-bar"><div class="int-phase-fill" style="width:50%"></div></div><span>71m</span></div>
+        <div class="int-phase"><span>末段</span><div class="int-phase-bar"><div class="int-phase-fill peak" style="width:70%"></div></div><span>96m</span></div>
+      </div>
+    </div>
+
+    <!-- JOE -->
+    <div class="int-col">
+      <div class="int-title">JOE</div>
+      <div class="int-bar-grp">
+        <div class="int-bar-label">Papers / Exam day <strong>1.27</strong></div>
+        <div class="int-bar"><div class="int-bar-fill" style="width:85%"></div></div>
+      </div>
+      <div class="int-bar-grp">
+        <div class="int-bar-label">Minutes / Exam day <strong>121</strong></div>
+        <div class="int-bar"><div class="int-bar-fill red" style="width:91%"></div></div>
+      </div>
+      <div class="int-phases">
+        <div class="int-phase"><span>前段</span><div class="int-phase-bar"><div class="int-phase-fill peak" style="width:85%"></div></div><span>125m</span></div>
+        <div class="int-phase"><span>缓冲</span><div class="int-phase-bar"><div class="int-phase-fill rest"></div></div><span>0</span></div>
+        <div class="int-phase"><span>中后段</span><div class="int-phase-bar"><div class="int-phase-fill" style="width:52%"></div></div><span>75m</span></div>
+        <div class="int-phase"><span>末段</span><div class="int-phase-bar"><div class="int-phase-fill" style="width:63%"></div></div><span>91m</span></div>
+      </div>
+    </div>
+
+    <!-- MILL -->
+    <div class="int-col">
+      <div class="int-title">MILL</div>
+      <div class="int-bar-grp">
+        <div class="int-bar-label">Papers / Exam day <strong>1.36</strong></div>
+        <div class="int-bar"><div class="int-bar-fill" style="width:91%"></div></div>
+      </div>
+      <div class="int-bar-grp">
+        <div class="int-bar-label">Minutes / Exam day <strong>131</strong></div>
+        <div class="int-bar"><div class="int-bar-fill red" style="width:100%"></div></div>
+      </div>
+      <div class="int-phases">
+        <div class="int-phase"><span>前段</span><div class="int-phase-bar"><div class="int-phase-fill peak" style="width:100%"></div></div><span>158m</span></div>
+        <div class="int-phase"><span>缓冲</span><div class="int-phase-bar"><div class="int-phase-fill rest"></div></div><span>0</span></div>
+        <div class="int-phase"><span>中后段</span><div class="int-phase-bar"><div class="int-phase-fill" style="width:48%"></div></div><span>70m</span></div>
+        <div class="int-phase"><span>末段</span><div class="int-phase-bar"><div class="int-phase-fill" style="width:45%"></div></div><span>64m</span></div>
+      </div>
+    </div>
+
+    <!-- RAIN -->
+    <div class="int-col">
+      <div class="int-title">RAIN</div>
+      <div class="int-bar-grp">
+        <div class="int-bar-label">Papers / Exam day <strong>1.36</strong></div>
+        <div class="int-bar"><div class="int-bar-fill" style="width:91%"></div></div>
+      </div>
+      <div class="int-bar-grp">
+        <div class="int-bar-label">Minutes / Exam day <strong>123</strong></div>
+        <div class="int-bar"><div class="int-bar-fill red" style="width:93%"></div></div>
+      </div>
+      <div class="int-phases">
+        <div class="int-phase"><span>前段</span><div class="int-phase-bar"><div class="int-phase-fill peak" style="width:78%"></div></div><span>120m</span></div>
+        <div class="int-phase"><span>缓冲</span><div class="int-phase-bar"><div class="int-phase-fill rest"></div></div><span>0</span></div>
+        <div class="int-phase"><span>中后段</span><div class="int-phase-bar"><div class="int-phase-fill" style="width:50%"></div></div><span>71m</span></div>
+        <div class="int-phase"><span>末段</span><div class="int-phase-bar"><div class="int-phase-fill" style="width:50%"></div></div><span>71m</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SECTION 06: PEAK DAYS ========== -->
+  <div class="section-head">
+    <div class="section-num">0<span>6</span></div>
+    <div class="section-title">
+      <h2>PEAK DAY / 个人峰值日</h2>
+      <div class="cn">每名考生单日考试时长最高的一天。判定实际体力与脑力极值。</div>
+    </div>
+    <div class="section-rule">WORST-CASE DAY</div>
+  </div>
+
+  <div class="peaks">
+    <div class="peak-grid">
+      <div class="peak-card">
+        <div class="peak-head">
+          <div class="peak-who">ALICE</div>
+          <div class="peak-tag">PEAK · 210 MIN</div>
+        </div>
+        <div class="peak-date">05/15 <span style="font-size:16px;color:var(--muted);">FRI</span></div>
+        <div class="peak-lbl">同日双考 × AM + PM</div>
+        <div class="peak-desc">周五上午 Math AA HL P2，下午接 Chemistry SL P1。HL 数学与化学连场，四天内三张数化试卷。</div>
+        <div class="peak-papers">
+          <div class="pp"><span>AM 09:30</span><span>Math AA HL P2 · 2h</span></div>
+          <div class="pp"><span>PM 13:30</span><span>Chem SL P1 · 1h30</span></div>
+        </div>
+      </div>
+
+      <div class="peak-card critical">
+        <div class="peak-head">
+          <div class="peak-who">JOE</div>
+          <div class="peak-tag">PEAK · 240 MIN</div>
+        </div>
+        <div class="peak-date">05/15 <span style="font-size:16px;opacity:0.7;">FRI</span></div>
+        <div class="peak-lbl">全表最重单日 / HL 化学</div>
+        <div class="peak-desc">上午 Math AA HL P2，下午 Chemistry HL P1。HL 化学双 block 约 2 小时，合计 4 小时，是四人中单日时长最高值。</div>
+        <div class="peak-papers">
+          <div class="pp"><span>AM 09:30</span><span>Math AA HL P2 · 2h</span></div>
+          <div class="pp"><span>PM 13:30</span><span>Chem HL P1 · 2h</span></div>
+        </div>
+      </div>
+
+      <div class="peak-card critical">
+        <div class="peak-head">
+          <div class="peak-who">MILL</div>
+          <div class="peak-tag">PEAK · 240 MIN</div>
+        </div>
+        <div class="peak-date">04/29 <span style="font-size:16px;opacity:0.7;">WED</span></div>
+        <div class="peak-lbl">考期第 3 天 / 起步最重</div>
+        <div class="peak-desc">上午 Physics HL P2（2h30），下午 商管 SL P1。考期第 3 天即出现峰值；04/27 起连续 4 日 6 张卷，整体起步最高压。</div>
+        <div class="peak-papers">
+          <div class="pp"><span>AM 09:30</span><span>Physics HL P2 · 2h30</span></div>
+          <div class="pp"><span>PM 13:30</span><span>BM SL P1 · 1h30</span></div>
+        </div>
+      </div>
+
+      <div class="peak-card">
+        <div class="peak-head">
+          <div class="peak-who">RAIN</div>
+          <div class="peak-tag">PEAK · 210 MIN</div>
+        </div>
+        <div class="peak-date">05/15 <span style="font-size:16px;color:var(--muted);">FRI</span></div>
+        <div class="peak-lbl">同日双考 × 数学 + 化学</div>
+        <div class="peak-desc">与 Alice 同型峰值。上午 Math AA HL P2，下午 Chem SL P1。接续 05/18 再考 Chem SL P2，末段连续高负荷。</div>
+        <div class="peak-papers">
+          <div class="pp"><span>AM 09:30</span><span>Math AA HL P2 · 2h</span></div>
+          <div class="pp"><span>PM 13:30</span><span>Chem SL P1 · 1h30</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <div class="footer">
+    <div>
+      <div class="big">SHEET END / §07</div>
+      COMPILED 2026 · IB MAY SESSION<br>
+      TYPESET / ARCHIVO · NOTO SERIF SC · JETBRAINS MONO
+    </div>
+    <div>
+      <div class="big" style="color:var(--red);">KEY OBSERVATIONS</div>
+      一、四人皆 11 个考试日；总量由 14 至 16 张卷不等<br>
+      二、Mill 总时长最高（24h），起步最重<br>
+      三、Alice/Joe/Rain 末段压力更集中<br>
+      四、05/13、05/15 为跨人共同高峰日
+    </div>
+    <div>
+      <div class="big">FOR REVIEW</div>
+      缓冲期 05/01→05/06 通用<br>
+      建议在此窗口整合 English B 冲刺<br>
+      末端 05/16→05/17 周末为最后可用缓冲<br>
+      Math AA HL P3 统一于 05/20 结束
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ========== DATA ==========
+const DAYS = [
+  ['04/27','MON','first'],['04/28','TUE',''],['04/29','WED',''],['04/30','THU',''],
+  ['05/01','FRI','weekend'],['05/02','SAT','weekend'],['05/03','SUN','weekend'],
+  ['05/04','MON',''],['05/05','TUE',''],['05/06','WED',''],
+  ['05/07','THU',''],['05/08','FRI',''],
+  ['05/09','SAT','weekend'],['05/10','SUN','weekend'],
+  ['05/11','MON',''],['05/12','TUE',''],['05/13','WED',''],['05/14','THU',''],
+  ['05/15','FRI',''],
+  ['05/16','SAT','weekend'],['05/17','SUN','weekend'],
+  ['05/18','MON',''],['05/19','TUE',''],['05/20','WED','last'],
+];
+
+// Format: [papers, minutes]
+const ALICE = [[1,75],[1,105],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[2,150],[1,60],[0,0],[0,0],[0,0],[1,105],[2,180],[1,120],[2,210],[0,0],[0,0],[1,90],[2,135],[2,120]];
+const JOE   = [[1,75],[2,195],[1,90],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[2,150],[1,60],[0,0],[0,0],[0,0],[1,105],[1,75],[1,120],[2,240],[0,0],[0,0],[1,150],[0,0],[1,75]];
+const MILL  = [[1,75],[2,225],[2,240],[1,90],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[2,150],[1,60],[0,0],[0,0],[0,0],[1,105],[2,180],[1,120],[1,120],[0,0],[0,0],[0,0],[0,0],[1,75]];
+const RAIN  = [[1,75],[2,195],[1,90],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[2,150],[1,60],[0,0],[0,0],[0,0],[1,105],[2,180],[1,120],[2,210],[0,0],[0,0],[1,90],[0,0],[1,75]];
+
+const STUDENTS = [
+  {name:'ALICE', idx:'01', data:ALICE, peak:18, total:'16 / 22h30'},
+  {name:'JOE',   idx:'02', data:JOE,   peak:18, total:'14 / 22h15'},
+  {name:'MILL',  idx:'03', data:MILL,  peak:2,  total:'15 / 24h00'},
+  {name:'RAIN',  idx:'04', data:RAIN,  peak:18, total:'15 / 22h30'},
+];
+
+// ========== BUILD MATRIX ==========
+function buildMatrix() {
+  const m = document.getElementById('matrix');
+  // Header row
+  m.innerHTML = '';
+  const corner = document.createElement('div');
+  corner.className = 'mh mh-corner';
+  corner.innerHTML = 'CANDIDATE / DAY';
+  m.appendChild(corner);
+
+  DAYS.forEach(([d, dow, cls]) => {
+    const h = document.createElement('div');
+    h.className = 'mh ' + cls;
+    h.innerHTML = `<div class="mh-date">${d}</div><div class="mh-dow">${dow}</div>`;
+    m.appendChild(h);
+  });
+
+  const tot = document.createElement('div');
+  tot.className = 'mh mh-tot';
+  tot.innerHTML = 'Σ PAPERS / TIME';
+  m.appendChild(tot);
+
+  // Student rows
+  STUDENTS.forEach((s, si) => {
+    const isLast = si === STUDENTS.length - 1;
+    const label = document.createElement('div');
+    label.className = 'mc-name' + (isLast ? ' last-row' : '');
+    label.innerHTML = `<span>${s.name}</span><span class="idx">${s.idx}</span>`;
+    if (isLast) label.style.borderBottom = 'none';
+    m.appendChild(label);
+
+    let totPapers = 0, totMins = 0;
+    s.data.forEach(([p, mins], di) => {
+      const c = document.createElement('div');
+      c.className = 'mc' + (isLast ? ' last-row' : '') + (DAYS[di][2] === 'weekend' ? ' weekend' : '');
+      if (isLast) c.style.borderBottom = 'none';
+      if (di === s.peak) c.classList.add('cell-peak');
+
+      // Fill color by minutes
+      let fill = 'var(--cell-0)';
+      if (mins >= 210) { fill = 'var(--cell-5)'; c.classList.add('cell-heavy'); }
+      else if (mins >= 150) { fill = 'var(--cell-4)'; c.classList.add('cell-heavy'); }
+      else if (mins >= 90) { fill = 'var(--cell-3)'; }
+      else if (mins >= 60) { fill = 'var(--cell-2)'; }
+      else if (mins > 0) { fill = 'var(--cell-1)'; }
+
+      if (p > 0) {
+        c.innerHTML = `
+          <div class="cell-fill" style="background:${fill};"></div>
+          <div class="cell-papers">${p}</div>
+          <div class="cell-mins">${formatTime(mins)}</div>
+        `;
+      } else {
+        c.innerHTML = `<div class="cell-fill" style="background:${fill};"></div><div class="cell-mins" style="opacity:0.25;">·</div>`;
+      }
+      m.appendChild(c);
+      totPapers += p;
+      totMins += mins;
+    });
+
+    const tot = document.createElement('div');
+    tot.className = 'mc-tot' + (isLast ? ' last-row' : '');
+    if (isLast) tot.style.borderBottom = 'none';
+    tot.innerHTML = `<div>${totPapers}</div><small>${formatTimeFull(totMins)}</small>`;
+    m.appendChild(tot);
+  });
+}
+function formatTime(mins) {
+  if (mins === 0) return '';
+  const h = Math.floor(mins/60);
+  const m = mins%60;
+  if (h===0) return m+'m';
+  if (m===0) return h+'h';
+  return h+'h'+(m<10?'0':'')+m;
+}
+function formatTimeFull(mins) {
+  const h = Math.floor(mins/60);
+  const m = mins%60;
+  return h+'h'+(m<10?'0':'')+m;
+}
+
+// ========== BUILD TIMELINES ==========
+// slots: [dayIndex, 'AM'|'PM', [ {s,p,t} ... ], redFlag ]
+const CAL = {
+  ALICE: {
+    meta: '16 papers · 22h30m',
+    slots: [
+      [0,'PM',[{s:'中文A',cn:true,p:'P1 1h15'}],false],
+      [1,'AM',[{s:'中文A',cn:true,p:'P2 1h45'}],false],
+      [10,'PM',[{s:'Eng B',p:'P1 1h30'},{s:'Eng B',p:'P2R 1h'}],true],
+      [11,'AM',[{s:'Eng B',p:'P2L 1h'}],false],
+      [15,'PM',[{s:'Econ',p:'P2 1h45'}],false],
+      [16,'AM',[{s:'Econ',p:'P1 1h15'},{s:'Econ',p:'P3 1h45'}],true],
+      [17,'PM',[{s:'Math',p:'P1 2h'}],false],
+      [18,'AM',[{s:'Math',p:'P2 2h'}],true],
+      [18,'PM',[{s:'Chem',p:'P1 1h30'}],true],
+      [21,'AM',[{s:'Chem',p:'P2 1h30'}],false],
+      [22,'PM',[{s:'Fr B',p:'P1 1h15'},{s:'Fr B',p:'P2R 1h'}],true],
+      [23,'AM',[{s:'Fr B',p:'P2L 45m'}],true],
+      [23,'PM',[{s:'Math',p:'P3 1h15'}],true],
+    ],
+  },
+  JOE: {
+    meta: '14 papers · 22h15m',
+    slots: [
+      [0,'PM',[{s:'中文A',cn:true,p:'P1 1h15'}],false],
+      [1,'AM',[{s:'中文A',cn:true,p:'P2 1h45'}],true],
+      [1,'PM',[{s:'Phys',p:'P1 1h30'}],true],
+      [2,'AM',[{s:'Phys',p:'P2 1h30'}],false],
+      [10,'PM',[{s:'Eng B',p:'P1 1h30'},{s:'Eng B',p:'P2R 1h'}],true],
+      [11,'AM',[{s:'Eng B',p:'P2L 1h'}],false],
+      [15,'PM',[{s:'Econ',p:'P2 1h45'}],false],
+      [16,'AM',[{s:'Econ',p:'P1 1h15'}],false],
+      [17,'PM',[{s:'Math',p:'P1 2h'}],false],
+      [18,'AM',[{s:'Math',p:'P2 2h'}],true],
+      [18,'PM',[{s:'Chem',p:'P1 2h'}],true],
+      [21,'AM',[{s:'Chem',p:'P2 2h30'}],false],
+      [23,'PM',[{s:'Math',p:'P3 1h15'}],false],
+    ],
+  },
+  MILL: {
+    meta: '15 papers · 24h00m',
+    slots: [
+      [0,'PM',[{s:'中文A',cn:true,p:'P1 1h15'}],false],
+      [1,'AM',[{s:'中文A',cn:true,p:'P2 1h45'}],true],
+      [1,'PM',[{s:'Phys',p:'P1 2h'}],true],
+      [2,'AM',[{s:'Phys',p:'P2 2h30'}],true],
+      [2,'PM',[{s:'BM',p:'P1 1h30'}],true],
+      [3,'AM',[{s:'BM',p:'P2 1h30'}],false],
+      [10,'PM',[{s:'Eng B',p:'P1 1h30'},{s:'Eng B',p:'P2R 1h'}],true],
+      [11,'AM',[{s:'Eng B',p:'P2L 1h'}],false],
+      [15,'PM',[{s:'Econ',p:'P2 1h45'}],false],
+      [16,'AM',[{s:'Econ',p:'P1 1h15'},{s:'Econ',p:'P3 1h45'}],true],
+      [17,'PM',[{s:'Math',p:'P1 2h'}],false],
+      [18,'AM',[{s:'Math',p:'P2 2h'}],false],
+      [23,'PM',[{s:'Math',p:'P3 1h15'}],false],
+    ],
+  },
+  RAIN: {
+    meta: '15 papers · 22h30m',
+    slots: [
+      [0,'PM',[{s:'中文A',cn:true,p:'P1 1h15'}],false],
+      [1,'AM',[{s:'中文A',cn:true,p:'P2 1h45'}],true],
+      [1,'PM',[{s:'Phys',p:'P1 1h30'}],true],
+      [2,'AM',[{s:'Phys',p:'P2 1h30'}],false],
+      [10,'PM',[{s:'Eng B',p:'P1 1h30'},{s:'Eng B',p:'P2R 1h'}],true],
+      [11,'AM',[{s:'Eng B',p:'P2L 1h'}],false],
+      [15,'PM',[{s:'Econ',p:'P2 1h45'}],false],
+      [16,'AM',[{s:'Econ',p:'P1 1h15'},{s:'Econ',p:'P3 1h45'}],true],
+      [17,'PM',[{s:'Math',p:'P1 2h'}],false],
+      [18,'AM',[{s:'Math',p:'P2 2h'}],true],
+      [18,'PM',[{s:'Chem',p:'P1 1h30'}],true],
+      [21,'AM',[{s:'Chem',p:'P2 1h30'}],false],
+      [23,'PM',[{s:'Math',p:'P3 1h15'}],false],
+    ],
+  },
+};
+
+function buildCalendar() {
+  const cal = document.getElementById('cal');
+  cal.innerHTML = '';
+
+  // Corner (spans cols 1-2)
+  const corner = document.createElement('div');
+  corner.className = 'cal-corner';
+  corner.innerHTML = 'CAND ↓ / DATE →';
+  cal.appendChild(corner);
+
+  // Date headers
+  DAYS.forEach(([d, dow, cls]) => {
+    const cell = document.createElement('div');
+    cell.className = 'cal-date ' + cls;
+    cell.innerHTML = `<div class="cal-date-d">${d}</div><div class="cal-date-dow">${dow}</div>`;
+    cal.appendChild(cell);
+  });
+
+  // Helper: render a slot's exams into a cell
+  function renderSlot(cell, slot) {
+    if (!slot) return;
+    const [, , exams, red] = slot;
+    // Merge into single block. Subject shown once (same subject per time slot per IB).
+    const ex = document.createElement('div');
+    ex.className = 'cal-exam' + (red ? ' red' : '');
+    const subj = exams[0].s;
+    const isCn = exams[0].cn;
+    let html = `<div class="s${isCn ? ' cn' : ''}">${subj}</div>`;
+    exams.forEach((e, i) => {
+      html += `<div class="p${i > 0 ? ' second' : ''}">${e.p}</div>`;
+    });
+    ex.innerHTML = html;
+    cell.appendChild(ex);
+  }
+
+  // Student blocks
+  let row = 2;
+  Object.entries(CAL).forEach(([name, info]) => {
+    // Label (col 1, span 2 rows)
+    const lbl = document.createElement('div');
+    lbl.className = 'cal-lbl';
+    lbl.style.gridColumn = '1';
+    lbl.style.gridRow = `${row} / span 2`;
+    lbl.innerHTML = `<div class="n">${name}</div><div class="m">${info.meta}</div>`;
+    cal.appendChild(lbl);
+
+    // AM label
+    const amLbl = document.createElement('div');
+    amLbl.className = 'cal-slot-lbl am';
+    amLbl.style.gridColumn = '2';
+    amLbl.style.gridRow = `${row}`;
+    amLbl.textContent = 'AM';
+    cal.appendChild(amLbl);
+
+    // AM cells
+    for (let d = 0; d < 24; d++) {
+      const c = document.createElement('div');
+      c.className = 'cal-cell am' + (DAYS[d][2] === 'weekend' ? ' weekend' : '');
+      c.style.gridColumn = `${3 + d}`;
+      c.style.gridRow = `${row}`;
+      renderSlot(c, info.slots.find(s => s[0] === d && s[1] === 'AM'));
+      cal.appendChild(c);
+    }
+
+    // PM label
+    const pmLbl = document.createElement('div');
+    pmLbl.className = 'cal-slot-lbl pm';
+    pmLbl.style.gridColumn = '2';
+    pmLbl.style.gridRow = `${row + 1}`;
+    pmLbl.textContent = 'PM';
+    cal.appendChild(pmLbl);
+
+    // PM cells
+    for (let d = 0; d < 24; d++) {
+      const c = document.createElement('div');
+      c.className = 'cal-cell pm' + (DAYS[d][2] === 'weekend' ? ' weekend' : '');
+      c.style.gridColumn = `${3 + d}`;
+      c.style.gridRow = `${row + 1}`;
+      renderSlot(c, info.slots.find(s => s[0] === d && s[1] === 'PM'));
+      cal.appendChild(c);
+    }
+
+    row += 2;
+  });
+}
+
+buildMatrix();
+buildCalendar();
+</script>
+
+</body>
+</html>
