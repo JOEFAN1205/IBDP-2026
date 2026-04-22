@@ -9,21 +9,36 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #EFE8DA;
-    --paper-2: #E6DEC9;
-    --ink: #0C0C0C;
-    --ink-soft: #232323;
-    --red: #D63321;
-    --red-deep: #A0241A;
-    --muted: #8C8476;
-    --line: #0C0C0C;
-    --accent: #1C3D2E;
-    --cell-0: rgba(12,12,12,0.00);
-    --cell-1: rgba(12,12,12,0.08);
-    --cell-2: rgba(12,12,12,0.22);
-    --cell-3: rgba(12,12,12,0.44);
-    --cell-4: rgba(214,51,33,0.72);
-    --cell-5: rgba(214,51,33,1);
+    --paper: #F4ECDF;
+    --paper-2: #E2CEAB;
+    --paper-hi: #FCF8F1;
+    --ink: #2A2420;
+    --ink-soft: #61564E;
+    --muted: #948477;
+    --line: #A47D55;
+    --line-soft: #D7C3AA;
+    --line-strong: #744F2B;
+    --line-dash: rgba(116,79,43,0.56);
+    --line-inner: #8B6844;
+    --line-inner-dash: rgba(116,79,43,0.68);
+    --accent: #5575A3;
+    --accent-deep: #37557F;
+    --accent-soft: #D8E1EB;
+    --alert: #C06B4A;
+    --alert-deep: #8F472F;
+    --alert-soft: #F0DED5;
+    --red: #5575A3;
+    --red-deep: #37557F;
+    --red-soft: #D8E1EB;
+    --gold: #C09046;
+    --cell-0: rgba(48,40,33,0.00);
+    --cell-1: rgba(48,40,33,0.05);
+    --cell-2: rgba(48,40,33,0.12);
+    --cell-3: rgba(48,40,33,0.22);
+    --cell-4: rgba(85,117,163,0.56);
+    --cell-5: rgba(55,85,127,0.84);
+    --shadow-soft: rgba(71,54,39,0.10);
+    --shadow-strong: rgba(71,54,39,0.18);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body {
@@ -34,11 +49,9 @@
     -webkit-font-smoothing: antialiased;
   }
   body {
-    background-image:
-      radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
-      radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
-    background-size: 3px 3px, 7px 7px;
-    background-position: 0 0, 1px 1px;
+    min-height: 100vh;
+    padding: 28px;
+    background: linear-gradient(180deg, #EFE2CC 0%, #E1CBA8 100%);
   }
   .mono { font-family: 'JetBrains Mono', monospace; }
   .display { font-family: 'Archivo Black', sans-serif; letter-spacing: -0.02em; }
@@ -48,15 +61,20 @@
   .sheet {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 24px 28px 80px;
+    padding: 30px 34px 88px;
     position: relative;
+    background: var(--paper-hi);
+    border: 1px solid var(--line-strong);
+    border-radius: 30px;
+    box-shadow: 0 6px 16px rgba(71,54,39,0.05);
   }
   .sheet::before {
     content: '';
     position: absolute;
-    top: 24px; bottom: 80px;
-    left: 28px; right: 28px;
-    border: 1px solid var(--line);
+    top: 18px; bottom: 18px;
+    left: 18px; right: 18px;
+    border: 1px solid var(--line-strong);
+    border-radius: 22px;
     pointer-events: none;
     z-index: 0;
   }
@@ -71,13 +89,18 @@
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    color: var(--ink-soft);
+    background: var(--paper-hi);
   }
   .strip-top > div {
     padding: 10px 14px;
     border-right: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    min-height: 44px;
   }
   .strip-top > div:last-child { border-right: none; }
-  .strip-top .red { color: var(--red); font-weight: 700; }
+  .strip-top .red { color: var(--alert); font-weight: 700; }
 
   /* ========== MASTHEAD ========== */
   .masthead {
@@ -85,6 +108,7 @@
     grid-template-columns: 120px 1fr 180px;
     border-bottom: 1px solid var(--line);
     min-height: 280px;
+    background: var(--paper-hi);
   }
   .masthead-side {
     border-right: 1px solid var(--line);
@@ -105,6 +129,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background: var(--paper-hi);
   }
   .masthead-title {
     font-family: 'Archivo Black', sans-serif;
@@ -142,6 +167,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background: var(--paper-2);
   }
   .masthead-meta-row {
     padding: 6px 0;
@@ -158,6 +184,7 @@
     grid-template-columns: 120px 1fr 180px;
     border-bottom: 1px solid var(--line);
     align-items: stretch;
+    background: var(--accent-soft);
   }
   .section-num {
     border-right: 1px solid var(--line);
@@ -169,6 +196,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: var(--paper-2);
   }
   .section-num span { color: var(--red); }
   .section-title {
@@ -209,6 +237,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     border-bottom: 1px solid var(--line);
+    background: var(--paper-2);
   }
   .reg-card {
     border-right: 1px solid var(--line);
@@ -217,6 +246,7 @@
     min-height: 260px;
     display: flex;
     flex-direction: column;
+    background: var(--paper-hi);
   }
   .reg-card:last-child { border-right: none; }
   .reg-head {
@@ -249,10 +279,10 @@
   }
   .reg-stat {
     padding: 10px 0 10px;
-    border-right: 1px dashed var(--line);
+    border-right: 1px dashed var(--line-dash);
   }
   .reg-stat:nth-child(2n) { border-right: none; padding-left: 10px; }
-  .reg-stat:nth-child(-n+2) { border-bottom: 1px dashed var(--line); }
+  .reg-stat:nth-child(-n+2) { border-bottom: 1px dashed var(--line-dash); }
   .reg-stat-num {
     font-family: 'Archivo Black', sans-serif;
     font-size: 34px;
@@ -287,9 +317,11 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
     letter-spacing: 0.15em;
-    background: var(--ink);
+    background: var(--accent-deep);
     color: var(--paper);
     padding: 3px 7px;
+    border-radius: 999px;
+    box-shadow: none;
     text-transform: uppercase;
   }
   .reg-chip.red { background: var(--red); }
@@ -298,12 +330,19 @@
   .matrix-wrap {
     border-bottom: 1px solid var(--line);
     padding: 24px 28px;
+    background: var(--paper);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) transparent;
   }
   .matrix {
     display: grid;
     grid-template-columns: 110px repeat(24, 1fr) 90px;
-    border: 1px solid var(--line);
+    border: 1px solid var(--line-strong);
     font-family: 'JetBrains Mono', monospace;
+    min-width: 1180px;
+    background: var(--paper-hi);
   }
   .matrix .mh {
     padding: 6px 4px;
@@ -320,7 +359,7 @@
     align-items: center;
     position: relative;
   }
-  .matrix .mh.weekend { background: #DCD4BD; }
+  .matrix .mh.weekend { background: var(--accent-soft); }
   .matrix .mh.first, .matrix .mh.last { background: var(--ink); color: var(--paper); }
   .matrix .mh-date {
     font-size: 12px;
@@ -336,7 +375,7 @@
   .matrix .mh.first .mh-dow, .matrix .mh.last .mh-dow { color: var(--paper); opacity: 0.7; }
   .matrix .mh.weekend .mh-dow { color: var(--ink); opacity: 0.6; }
   .matrix .mh-corner {
-    background: var(--ink);
+    background: var(--accent-deep);
     color: var(--paper);
     font-weight: 700;
     font-size: 9px;
@@ -363,7 +402,7 @@
     text-align: center;
     font-size: 10px;
   }
-  .matrix .mc.weekend { background: repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(0,0,0,0.04) 4px, rgba(0,0,0,0.04) 5px); }
+  .matrix .mc.weekend { background: repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(103,92,81,0.07) 4px, rgba(103,92,81,0.07) 5px); }
   .matrix .mc-name {
     border-right: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
@@ -375,7 +414,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--ink);
+    background: var(--accent-deep);
     color: var(--paper);
     min-height: 72px;
   }
@@ -430,7 +469,7 @@
     position: absolute;
     top: 2px; right: 2px;
     width: 6px; height: 6px;
-    background: var(--red);
+    background: var(--alert);
     border-radius: 50%;
     z-index: 2;
   }
@@ -459,108 +498,200 @@
   }
   .matrix-legend .peak-dot {
     width: 6px; height: 6px; border-radius: 50%;
-    background: var(--red);
+    background: var(--alert);
     display: inline-block;
     margin-right: 6px;
   }
 
-  /* ========== SECTION 03: TIMELINES ========== */
-  .timelines {
+  /* ========== SECTION 03: CALENDAR GRID ========== */
+  .cal-wrap {
+    padding: 24px 28px;
     border-bottom: 1px solid var(--line);
+    background: var(--paper);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) transparent;
   }
-  .tl-row {
+  .cal {
     display: grid;
-    grid-template-columns: 110px 1fr;
-    border-bottom: 1px solid var(--line);
+    grid-template-columns: 96px 32px repeat(24, minmax(0, 1fr));
+    font-family: 'JetBrains Mono', monospace;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    min-width: 1340px;
+    background: var(--paper-hi);
   }
-  .tl-row:last-child { border-bottom: none; }
-  .tl-label {
-    border-right: 1px solid var(--line);
-    padding: 14px 16px;
+  .cal-corner {
+    grid-column: 1 / 3;
     background: var(--ink);
     color: var(--paper);
+    padding: 8px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .cal-date {
+    padding: 4px 2px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--paper-2);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 44px;
+  }
+  .cal-date.weekend { background: var(--accent-soft); }
+  .cal-date.first, .cal-date.last { background: var(--ink); color: var(--paper); }
+  .cal-date.peak-col { background: var(--red); color: var(--paper); }
+  .cal-date-d { font-size: 11px; font-weight: 700; font-family: 'Archivo', sans-serif; line-height: 1; }
+  .cal-date-dow { font-size: 8px; color: var(--muted); margin-top: 3px; letter-spacing: 0.12em; }
+  .cal-date.first .cal-date-dow,
+  .cal-date.last .cal-date-dow,
+  .cal-date.peak-col .cal-date-dow { color: var(--paper); opacity: 0.75; }
+
+  .cal-lbl {
+    grid-column: 1;
+    background: var(--accent-deep);
+    color: var(--paper);
+    padding: 10px 10px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  .tl-label .name {
+  .cal-lbl .n {
     font-family: 'Archivo Black', sans-serif;
-    font-size: 28px;
+    font-size: 22px;
     line-height: 0.9;
     letter-spacing: -0.02em;
-    text-transform: uppercase;
   }
-  .tl-label .meta {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+  .cal-lbl .m {
+    font-size: 8px;
+    letter-spacing: 0.12em;
     margin-top: 8px;
-    opacity: 0.7;
+    opacity: 0.75;
+    text-transform: uppercase;
   }
-  .tl-track {
-    position: relative;
-    padding: 18px 20px;
-    min-height: 120px;
-  }
-  .tl-axis {
-    position: relative;
-    height: 24px;
-    border-bottom: 1px solid var(--line);
-    margin-bottom: 14px;
-  }
-  .tl-tick {
-    position: absolute;
-    bottom: 0;
-    width: 1px;
-    height: 6px;
-    background: var(--line);
-  }
-  .tl-tick.major {
-    height: 14px;
-  }
-  .tl-tick-lbl {
-    position: absolute;
-    bottom: 16px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
+
+  .cal-slot-lbl {
+    grid-column: 2;
+    background: var(--paper-2);
+    border-right: 1px solid var(--line);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 11px;
     letter-spacing: 0.05em;
-    color: var(--muted);
-    transform: translateX(-50%);
-    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink);
   }
-  .tl-exam {
-    position: absolute;
-    bottom: 0;
-    height: 42px;
+  .cal-slot-lbl.am { border-bottom: 1px dashed var(--line-dash); }
+  .cal-slot-lbl.pm { border-bottom: 1px solid var(--line); }
+
+  .cal-cell {
+    border-right: 1px solid var(--line);
+    padding: 2px;
+    min-height: 48px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--paper);
+  }
+  .cal-cell.am { border-bottom: 1px dashed var(--line-dash); }
+  .cal-cell.pm { border-bottom: 1px solid var(--line); }
+  .cal-cell.weekend {
+    background: repeating-linear-gradient(45deg, var(--paper), var(--paper) 3px, rgba(103,92,81,0.08) 3px, rgba(103,92,81,0.08) 4px);
+  }
+
+  .cal-exam {
+    flex: 1;
+    width: 100%;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3px 4px;
+    font-size: 9px;
+    line-height: 1.15;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 3px 5px;
-    background: var(--ink);
-    color: var(--paper);
+    min-width: 0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .cal-exam.red { background: var(--red); }
+  .cal-exam .s {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0;
+    font-weight: 900;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cal-exam .s.cn { font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 10px; }
+  .cal-exam .p {
+    opacity: 0.88;
+    font-size: 8px;
+    margin-top: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.02em;
+  }
+  .cal-exam .p.second { margin-top: 0; padding-top: 1px; border-top: 1px solid rgba(255,255,255,0.25); }
+
+  .cal-legend {
+    margin-top: 16px;
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
     font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
-    line-height: 1.15;
-    letter-spacing: 0.02em;
-    overflow: hidden;
-    border-right: 1px solid var(--paper);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    align-items: center;
   }
-  .tl-exam.red { background: var(--red); }
-  .tl-exam .subj { font-weight: 700; font-size: 10px; letter-spacing: 0.05em; }
-  .tl-exam .paper { opacity: 0.85; }
+  .cal-legend .sw {
+    display: inline-block;
+    width: 22px; height: 11px;
+    border: 1px solid var(--line-strong);
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .cal-legend .sw.bk { background: var(--ink); }
+  .cal-legend .sw.rd { background: var(--red); border-color: var(--red); }
+  .cal-legend .sw.we { background: repeating-linear-gradient(45deg, var(--paper), var(--paper) 3px, rgba(103,92,81,0.16) 3px, rgba(103,92,81,0.16) 4px); }
 
   /* ========== SECTION 04: SUBJECT MATRIX ========== */
   .subj-matrix {
     padding: 24px 28px;
     border-bottom: 1px solid var(--line);
+    background: var(--paper);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) transparent;
   }
   .subj-grid {
     display: grid;
     grid-template-columns: 200px repeat(4, 1fr) 80px;
-    border: 1px solid var(--line);
+    border: 1px solid var(--line-strong);
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
+    min-width: 760px;
+    background: var(--paper-hi);
   }
   .subj-grid > div {
     padding: 10px 12px;
@@ -572,7 +703,7 @@
   }
   .subj-grid > div:nth-child(6n) { border-right: none; }
   .subj-grid .subj-head {
-    background: var(--ink);
+    background: var(--accent-deep);
     color: var(--paper);
     font-weight: 700;
     letter-spacing: 0.15em;
@@ -591,7 +722,7 @@
   .subj-grid .subj-name .lvl {
     font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
-    background: var(--ink);
+    background: var(--accent-deep);
     color: var(--paper);
     padding: 2px 6px;
     margin-left: 8px;
@@ -604,7 +735,7 @@
     font-size: 14px;
   }
   .subj-grid .cell-yes.hl { background: var(--red); color: var(--paper); }
-  .subj-grid .cell-yes.sl { background: rgba(12,12,12,0.08); color: var(--ink); }
+  .subj-grid .cell-yes.sl { background: rgba(103,92,81,0.10); color: var(--ink); }
   .subj-grid .cell-no {
     justify-content: center;
     color: var(--muted);
@@ -622,6 +753,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     border-bottom: 1px solid var(--line);
+    background: var(--paper-hi);
   }
   .int-col {
     border-right: 1px solid var(--line);
@@ -629,6 +761,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    background: var(--paper-hi);
   }
   .int-col:last-child { border-right: none; }
   .int-title {
@@ -665,11 +798,11 @@
     height: 10px;
     background: var(--cell-1);
     position: relative;
-    border: 1px solid var(--line);
+    border: 1px solid var(--line-strong);
   }
   .int-bar-fill {
     height: 100%;
-    background: var(--ink);
+    background: var(--accent-deep);
   }
   .int-bar-fill.red { background: var(--red); }
 
@@ -691,21 +824,22 @@
   }
   .int-phase-bar {
     height: 14px;
-    border: 1px solid var(--line);
+    border: 1px solid var(--line-strong);
     position: relative;
     overflow: hidden;
   }
   .int-phase-fill {
     height: 100%;
-    background: var(--ink);
+    background: var(--accent-deep);
   }
-  .int-phase-fill.rest { background: repeating-linear-gradient(45deg, var(--paper), var(--paper) 3px, var(--line) 3px, var(--line) 4px); }
+  .int-phase-fill.rest { background: repeating-linear-gradient(45deg, var(--paper), var(--paper) 3px, rgba(156,143,130,0.20) 3px, rgba(156,143,130,0.20) 4px); }
   .int-phase-fill.peak { background: var(--red); }
 
   /* ========== SECTION 06: PEAK DAYS ========== */
   .peaks {
     border-bottom: 1px solid var(--line);
     padding: 24px 28px;
+    background: var(--paper-hi);
   }
   .peak-grid {
     display: grid;
@@ -720,8 +854,33 @@
     position: relative;
   }
   .peak-card:last-child { border-right: none; }
-  .peak-card.critical { background: var(--red); color: var(--paper); }
-  .peak-card.critical .peak-lbl { color: var(--paper); opacity: 0.7; }
+  .peak-card.critical {
+    background: var(--alert-soft);
+    color: var(--ink);
+    padding-left: 22px;
+  }
+  .peak-card.critical::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: var(--alert);
+  }
+  .peak-card.critical .peak-who { color: var(--alert-deep); }
+  .peak-card.critical .peak-tag {
+    color: #fff;
+    background: var(--alert);
+    padding: 3px 7px;
+    margin-left: auto;
+  }
+  .peak-card.critical .peak-date { color: var(--alert-deep); }
+  .peak-card.critical .peak-lbl {
+    color: var(--alert-deep);
+    opacity: 1;
+    font-weight: 700;
+  }
+  .peak-card.critical .peak-head { border-bottom-color: var(--alert); }
+  .peak-card.critical .peak-papers { border-top-color: var(--line); }
   .peak-head {
     display: flex;
     justify-content: space-between;
@@ -788,10 +947,12 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
+    background: var(--paper-hi);
   }
   .footer > div {
     padding: 18px 22px;
     border-right: 1px solid var(--line);
+    background: var(--paper-hi);
   }
   .footer > div:last-child { border-right: none; }
   .footer .big {
@@ -806,18 +967,159 @@
   /* ========== CORNER TICKS ========== */
   .corner {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
   }
-  .corner.tl { top: -1px; left: -1px; border-top: 2px solid var(--red); border-left: 2px solid var(--red); }
-  .corner.tr { top: -1px; right: -1px; border-top: 2px solid var(--red); border-right: 2px solid var(--red); }
-  .corner.bl { bottom: -1px; left: -1px; border-bottom: 2px solid var(--red); border-left: 2px solid var(--red); }
-  .corner.br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--red); border-right: 2px solid var(--red); }
+  .corner.tl { top: 10px; left: 10px; border-top: 2px solid var(--red); border-left: 2px solid var(--red); }
+  .corner.tr { top: 10px; right: 10px; border-top: 2px solid var(--red); border-right: 2px solid var(--red); }
+  .corner.bl { bottom: 10px; left: 10px; border-bottom: 2px solid var(--red); border-left: 2px solid var(--red); }
+  .corner.br { bottom: 10px; right: 10px; border-bottom: 2px solid var(--red); border-right: 2px solid var(--red); }
+
+  /* Sharper internal dividers without shifting the whole page palette */
+  .strip-top,
+  .strip-top > div,
+  .masthead,
+  .masthead-side,
+  .masthead-main,
+  .masthead-sub,
+  .section-head,
+  .section-num,
+  .section-title,
+  .registry,
+  .reg-card,
+  .reg-head,
+  .reg-subj,
+  .matrix,
+  .matrix .mh,
+  .matrix .mc,
+  .matrix .mc-name,
+  .matrix .mc-tot,
+  .cal,
+  .cal-corner,
+  .cal-date,
+  .cal-lbl,
+  .cal-slot-lbl,
+  .cal-cell,
+  .subj-grid,
+  .subj-grid > div,
+  .intensity,
+  .int-col,
+  .int-title,
+  .int-phases,
+  .int-bar,
+  .int-phase-bar,
+  .peaks,
+  .peak-grid,
+  .peak-card,
+  .footer > div {
+    border-color: var(--line-inner);
+  }
+  .masthead-meta-row,
+  .reg-stat,
+  .reg-stat:nth-child(-n+2),
+  .cal-slot-lbl.am,
+  .cal-cell.am {
+    border-color: var(--line-inner-dash);
+  }
 
   @media (max-width: 1200px) {
+    body { padding: 20px; }
+    .sheet { padding: 26px 28px 72px; border-radius: 26px; }
+    .sheet::before { top: 14px; bottom: 14px; left: 14px; right: 14px; border-radius: 18px; }
     .masthead-title { font-size: 98px; }
-    .matrix { grid-template-columns: 90px repeat(24, 1fr) 72px; font-size: 9px; }
+    .matrix { grid-template-columns: 90px repeat(24, minmax(32px, 1fr)) 72px; font-size: 9px; }
     .matrix .cell-papers { font-size: 14px; }
+    .registry,
+    .intensity,
+    .peak-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .reg-card,
+    .int-col,
+    .peak-card { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .reg-card:nth-child(2n),
+    .int-col:nth-child(2n),
+    .peak-card:nth-child(2n) { border-right: none; }
+    .reg-card:nth-last-child(-n+2),
+    .int-col:nth-last-child(-n+2),
+    .peak-card:nth-last-child(-n+2) { border-bottom: none; }
+  }
+
+  @media (max-width: 900px) {
+    body { padding: 14px; }
+    .sheet { padding: 20px 20px 56px; border-radius: 22px; }
+    .sheet::before { top: 12px; bottom: 12px; left: 12px; right: 12px; border-radius: 16px; }
+    .corner { width: 10px; height: 10px; }
+    .corner.tl { top: 8px; left: 8px; }
+    .corner.tr { top: 8px; right: 8px; }
+    .corner.bl { bottom: 8px; left: 8px; }
+    .corner.br { bottom: 8px; right: 8px; }
+    .strip-top { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .strip-top > div:last-child { grid-column: 1 / -1; }
+    .masthead,
+    .section-head { grid-template-columns: 1fr; }
+    .masthead-side {
+      writing-mode: horizontal-tb;
+      transform: none;
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .masthead-main {
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+      padding: 22px 22px 24px;
+    }
+    .section-num,
+    .section-title { border-right: none; }
+    .section-num {
+      justify-content: flex-start;
+      padding-bottom: 8px;
+    }
+    .section-title {
+      padding-top: 0;
+      padding-bottom: 18px;
+    }
+    .section-rule {
+      justify-content: flex-start;
+      padding-top: 0;
+    }
+    .registry,
+    .intensity,
+    .peak-grid,
+    .footer { grid-template-columns: 1fr; }
+    .reg-card,
+    .int-col,
+    .peak-card,
+    .footer > div {
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+    }
+    .reg-card:last-child,
+    .int-col:last-child,
+    .peak-card:last-child,
+    .footer > div:last-child { border-bottom: none; }
+  }
+
+  @media (max-width: 640px) {
+    .masthead-title {
+      font-size: 58px;
+      line-height: 0.94;
+    }
+    .masthead-sub {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .section-title h2 { font-size: 22px; }
+    .section-title .cn { font-size: 13px; }
+    .reg-name { font-size: 34px; }
+    .peak-date { font-size: 28px; }
+    .matrix-wrap,
+    .cal-wrap,
+    .subj-matrix,
+    .peaks { padding: 18px 18px 20px; }
   }
 </style>
 </head>
@@ -924,7 +1226,7 @@
 
     <!-- JOE -->
     <div class="reg-card">
-      <span class="reg-chip">TIED FEWEST</span>
+      <span class="reg-chip">FEWEST PAPERS</span>
       <div class="reg-head">
         <div class="reg-index">CAND / 02</div>
       </div>
@@ -958,7 +1260,7 @@
 
     <!-- MILL -->
     <div class="reg-card">
-      <span class="reg-chip">TIED FEWEST</span>
+      <span class="reg-chip red">HARDEST OPENING</span>
       <div class="reg-head">
         <div class="reg-index">CAND / 03</div>
       </div>
@@ -1054,17 +1356,26 @@
     </div>
   </div>
 
-  <!-- ========== SECTION 03: TIMELINES ========== -->
+  <!-- ========== SECTION 03: CALENDAR GRID ========== -->
   <div class="section-head">
     <div class="section-num">0<span>3</span></div>
     <div class="section-title">
-      <h2>TIMELINE / 个体时序</h2>
-      <div class="cn">每位考生的试卷在 24 天窗口内的分布。红色代表同日双考或同场次双卷。</div>
+      <h2>CALENDAR / 日历对照</h2>
+      <div class="cn">24 天 × 4 考生。上下两行为每日上午/下午。方块落位 = 该日期该时段的考试。红色 = 同场次双卷或同日双考。斜纹 = 周末。</div>
     </div>
-    <div class="section-rule">N=4 TRACKS</div>
+    <div class="section-rule">24 COLS × 8 ROWS</div>
   </div>
 
-  <div class="timelines" id="timelines"></div>
+  <div class="cal-wrap">
+    <div class="cal" id="cal"></div>
+
+    <div class="cal-legend">
+      <span><span class="sw bk"></span>SINGLE / 普通单卷</span>
+      <span><span class="sw rd"></span>DOUBLE / 同场双卷或同日双考</span>
+      <span><span class="sw we"></span>WEEKEND / 周末空档</span>
+      <span style="margin-left:auto;">DASH = AM/PM 内分隔 · SOLID = 日分隔</span>
+    </div>
+  </div>
 
   <!-- ========== SECTION 04: SUBJECT MATRIX ========== -->
   <div class="section-head">
@@ -1227,8 +1538,8 @@
       <div class="int-phases">
         <div class="int-phase"><span>前段</span><div class="int-phase-bar"><div class="int-phase-fill peak" style="width:100%"></div></div><span>158m</span></div>
         <div class="int-phase"><span>缓冲</span><div class="int-phase-bar"><div class="int-phase-fill rest"></div></div><span>0</span></div>
-        <div class="int-phase"><span>中后段</span><div class="int-phase-bar"><div class="int-phase-fill" style="width:36%"></div></div><span>56m</span></div>
-        <div class="int-phase"><span>末段</span><div class="int-phase-bar"><div class="int-phase-fill" style="width:28%"></div></div><span>45m</span></div>
+        <div class="int-phase"><span>中后段</span><div class="int-phase-bar"><div class="int-phase-fill" style="width:34%"></div></div><span>49m</span></div>
+        <div class="int-phase"><span>末段</span><div class="int-phase-bar"><div class="int-phase-fill" style="width:45%"></div></div><span>64m</span></div>
       </div>
     </div>
 
@@ -1332,9 +1643,9 @@
     <div>
       <div class="big" style="color:var(--red);">KEY OBSERVATIONS</div>
       一、四人皆 11 个考试日；总量由 14 至 16 张卷不等<br>
-      二、Mill 修正后降至 14 张卷 / 22h15，但起步仍最重<br>
-      三、Alice/Joe/Rain 末段压力更集中<br>
-      四、04/28、05/07、05/15 为跨人共同高压日
+      二、Mill 起步最重（04/27 → 04/30 四天内 6 卷）<br>
+      三、Alice/Rain 总时长最高（22h30）；末段压力集中<br>
+      四、05/13、05/15 为跨人共同高峰日
     </div>
     <div>
       <div class="big">FOR REVIEW</div>
@@ -1351,7 +1662,7 @@
 // ========== DATA ==========
 const DAYS = [
   ['04/27','MON','first'],['04/28','TUE',''],['04/29','WED',''],['04/30','THU',''],
-  ['05/01','FRI',''],['05/02','SAT','weekend'],['05/03','SUN','weekend'],
+  ['05/01','FRI','weekend'],['05/02','SAT','weekend'],['05/03','SUN','weekend'],
   ['05/04','MON',''],['05/05','TUE',''],['05/06','WED',''],
   ['05/07','THU',''],['05/08','FRI',''],
   ['05/09','SAT','weekend'],['05/10','SUN','weekend'],
@@ -1456,139 +1767,170 @@ function formatTimeFull(mins) {
 }
 
 // ========== BUILD TIMELINES ==========
-// Each exam: [day_index, am_or_pm_string, subject, paper, duration, red]
-const TL_DATA = {
-  ALICE: [
-    [0,'PM','中文A SL','P1','1h15',false],
-    [1,'AM','中文A SL','P2','1h45',false],
-    [10,'PM','English B HL','P1','1h30',true],
-    [10,'PM2','English B HL','P2R','1h',true],
-    [11,'AM','English B HL','P2L','1h',false],
-    [15,'PM','Econ HL','P2','1h45',false],
-    [16,'AM','Econ HL','P1','1h15',true],
-    [16,'AM2','Econ HL','P3','1h45',true],
-    [17,'PM','Math AA HL','P1','2h',false],
-    [18,'AM','Math AA HL','P2','2h',true],
-    [18,'PM','Chem SL','P1','1h30',true],
-    [21,'AM','Chem SL','P2','1h30',false],
-    [22,'PM','French B SL','P1','1h15',true],
-    [22,'PM2','French B SL','P2R','1h',true],
-    [23,'AM','French B SL','P2L','45m',true],
-    [23,'PM','Math AA HL','P3','1h15',true],
-  ],
-  JOE: [
-    [0,'PM','中文A SL','P1','1h15',false],
-    [1,'AM','中文A SL','P2','1h45',true],
-    [1,'PM','Physics SL','P1','1h30',true],
-    [2,'AM','Physics SL','P2','1h30',false],
-    [10,'PM','English B HL','P1','1h30',true],
-    [10,'PM2','English B HL','P2R','1h',true],
-    [11,'AM','English B HL','P2L','1h',false],
-    [15,'PM','Econ SL','P2','1h45',false],
-    [16,'AM','Econ SL','P1','1h15',false],
-    [17,'PM','Math AA HL','P1','2h',false],
-    [18,'AM','Math AA HL','P2','2h',true],
-    [18,'PM','Chem HL','P1','2h',true],
-    [21,'AM','Chem HL','P2','2h30',false],
-    [23,'PM','Math AA HL','P3','1h15',false],
-  ],
-  MILL: [
-    [0,'PM','中文A SL','P1','1h15',false],
-    [1,'AM','中文A SL','P2','1h45',true],
-    [1,'PM','Physics HL','P1','2h',true],
-    [2,'AM','Physics HL','P2','2h30',true],
-    [2,'PM','商管 SL','P1','1h30',true],
-    [3,'AM','商管 SL','P2','1h30',false],
-    [10,'PM','English B HL','P1','1h30',true],
-    [10,'PM2','English B HL','P2R','1h',true],
-    [11,'AM','English B HL','P2L','1h',false],
-    [15,'PM','Econ SL','P2','1h45',false],
-    [16,'AM','Econ SL','P1','1h15',false],
-    [17,'PM','Math AA HL','P1','2h',false],
-    [18,'AM','Math AA HL','P2','2h',false],
-    [23,'PM','Math AA HL','P3','1h15',false],
-  ],
-  RAIN: [
-    [0,'PM','中文A SL','P1','1h15',false],
-    [1,'AM','中文A SL','P2','1h45',true],
-    [1,'PM','Physics SL','P1','1h30',true],
-    [2,'AM','Physics SL','P2','1h30',false],
-    [10,'PM','English B HL','P1','1h30',true],
-    [10,'PM2','English B HL','P2R','1h',true],
-    [11,'AM','English B HL','P2L','1h',false],
-    [15,'PM','Econ HL','P2','1h45',false],
-    [16,'AM','Econ HL','P1','1h15',true],
-    [16,'AM2','Econ HL','P3','1h45',true],
-    [17,'PM','Math AA HL','P1','2h',false],
-    [18,'AM','Math AA HL','P2','2h',true],
-    [18,'PM','Chem SL','P1','1h30',true],
-    [21,'AM','Chem SL','P2','1h30',false],
-    [23,'PM','Math AA HL','P3','1h15',false],
-  ],
+// slots: [dayIndex, 'AM'|'PM', [ {s,p,t} ... ], redFlag ]
+const CAL = {
+  ALICE: {
+    meta: '16 papers · 22h30m',
+    slots: [
+      [0,'PM',[{s:'中文A',cn:true,p:'P1 1h15'}],false],
+      [1,'AM',[{s:'中文A',cn:true,p:'P2 1h45'}],false],
+      [10,'PM',[{s:'Eng B',p:'P1 1h30'},{s:'Eng B',p:'P2R 1h'}],true],
+      [11,'AM',[{s:'Eng B',p:'P2L 1h'}],false],
+      [15,'PM',[{s:'Econ',p:'P2 1h45'}],false],
+      [16,'AM',[{s:'Econ',p:'P1 1h15'},{s:'Econ',p:'P3 1h45'}],true],
+      [17,'PM',[{s:'Math',p:'P1 2h'}],false],
+      [18,'AM',[{s:'Math',p:'P2 2h'}],true],
+      [18,'PM',[{s:'Chem',p:'P1 1h30'}],true],
+      [21,'AM',[{s:'Chem',p:'P2 1h30'}],false],
+      [22,'PM',[{s:'Fr B',p:'P1 1h15'},{s:'Fr B',p:'P2R 1h'}],true],
+      [23,'AM',[{s:'Fr B',p:'P2L 45m'}],true],
+      [23,'PM',[{s:'Math',p:'P3 1h15'}],true],
+    ],
+  },
+  JOE: {
+    meta: '14 papers · 22h15m',
+    slots: [
+      [0,'PM',[{s:'中文A',cn:true,p:'P1 1h15'}],false],
+      [1,'AM',[{s:'中文A',cn:true,p:'P2 1h45'}],true],
+      [1,'PM',[{s:'Phys',p:'P1 1h30'}],true],
+      [2,'AM',[{s:'Phys',p:'P2 1h30'}],false],
+      [10,'PM',[{s:'Eng B',p:'P1 1h30'},{s:'Eng B',p:'P2R 1h'}],true],
+      [11,'AM',[{s:'Eng B',p:'P2L 1h'}],false],
+      [15,'PM',[{s:'Econ',p:'P2 1h45'}],false],
+      [16,'AM',[{s:'Econ',p:'P1 1h15'}],false],
+      [17,'PM',[{s:'Math',p:'P1 2h'}],false],
+      [18,'AM',[{s:'Math',p:'P2 2h'}],true],
+      [18,'PM',[{s:'Chem',p:'P1 2h'}],true],
+      [21,'AM',[{s:'Chem',p:'P2 2h30'}],false],
+      [23,'PM',[{s:'Math',p:'P3 1h15'}],false],
+    ],
+  },
+  MILL: {
+    meta: '14 papers · 22h15m',
+    slots: [
+      [0,'PM',[{s:'中文A',cn:true,p:'P1 1h15'}],false],
+      [1,'AM',[{s:'中文A',cn:true,p:'P2 1h45'}],true],
+      [1,'PM',[{s:'Phys',p:'P1 2h'}],true],
+      [2,'AM',[{s:'Phys',p:'P2 2h30'}],true],
+      [2,'PM',[{s:'BM',p:'P1 1h30'}],true],
+      [3,'AM',[{s:'BM',p:'P2 1h30'}],false],
+      [10,'PM',[{s:'Eng B',p:'P1 1h30'},{s:'Eng B',p:'P2R 1h'}],true],
+      [11,'AM',[{s:'Eng B',p:'P2L 1h'}],false],
+      [15,'PM',[{s:'Econ',p:'P2 1h45'}],false],
+      [16,'AM',[{s:'Econ',p:'P1 1h15'}],false],
+      [17,'PM',[{s:'Math',p:'P1 2h'}],false],
+      [18,'AM',[{s:'Math',p:'P2 2h'}],false],
+      [23,'PM',[{s:'Math',p:'P3 1h15'}],false],
+    ],
+  },
+  RAIN: {
+    meta: '15 papers · 22h30m',
+    slots: [
+      [0,'PM',[{s:'中文A',cn:true,p:'P1 1h15'}],false],
+      [1,'AM',[{s:'中文A',cn:true,p:'P2 1h45'}],true],
+      [1,'PM',[{s:'Phys',p:'P1 1h30'}],true],
+      [2,'AM',[{s:'Phys',p:'P2 1h30'}],false],
+      [10,'PM',[{s:'Eng B',p:'P1 1h30'},{s:'Eng B',p:'P2R 1h'}],true],
+      [11,'AM',[{s:'Eng B',p:'P2L 1h'}],false],
+      [15,'PM',[{s:'Econ',p:'P2 1h45'}],false],
+      [16,'AM',[{s:'Econ',p:'P1 1h15'},{s:'Econ',p:'P3 1h45'}],true],
+      [17,'PM',[{s:'Math',p:'P1 2h'}],false],
+      [18,'AM',[{s:'Math',p:'P2 2h'}],true],
+      [18,'PM',[{s:'Chem',p:'P1 1h30'}],true],
+      [21,'AM',[{s:'Chem',p:'P2 1h30'}],false],
+      [23,'PM',[{s:'Math',p:'P3 1h15'}],false],
+    ],
+  },
 };
 
-function buildTimelines() {
-  const container = document.getElementById('timelines');
-  container.innerHTML = '';
-  Object.keys(TL_DATA).forEach(name => {
-    const row = document.createElement('div');
-    row.className = 'tl-row';
+function buildCalendar() {
+  const cal = document.getElementById('cal');
+  cal.innerHTML = '';
 
-    const stu = STUDENTS.find(s => s.name === name);
+  // Corner (spans cols 1-2)
+  const corner = document.createElement('div');
+  corner.className = 'cal-corner';
+  corner.innerHTML = 'CAND ↓ / DATE →';
+  cal.appendChild(corner);
 
-    row.innerHTML = `
-      <div class="tl-label">
-        <div class="name">${name}</div>
-        <div class="meta">${stu.total}</div>
-      </div>
-      <div class="tl-track">
-        <div class="tl-axis"></div>
-      </div>
-    `;
-    const axis = row.querySelector('.tl-axis');
+  // Date headers
+  DAYS.forEach(([d, dow, cls]) => {
+    const cell = document.createElement('div');
+    cell.className = 'cal-date ' + cls;
+    cell.innerHTML = `<div class="cal-date-d">${d}</div><div class="cal-date-dow">${dow}</div>`;
+    cal.appendChild(cell);
+  });
 
-    // Build axis ticks
-    DAYS.forEach((d, i) => {
-      const t = document.createElement('div');
-      t.className = 'tl-tick' + ((d[1]==='MON'||i===0||i===23)?' major':'');
-      t.style.left = ((i + 0.5) / 24 * 100) + '%';
-      axis.appendChild(t);
-      if (d[1]==='MON'||i===0||i===23) {
-        const lbl = document.createElement('div');
-        lbl.className = 'tl-tick-lbl';
-        lbl.style.left = ((i + 0.5) / 24 * 100) + '%';
-        lbl.textContent = d[0];
-        axis.appendChild(lbl);
-      }
+  // Helper: render a slot's exams into a cell
+  function renderSlot(cell, slot) {
+    if (!slot) return;
+    const [, , exams, red] = slot;
+    // Merge into single block. Subject shown once (same subject per time slot per IB).
+    const ex = document.createElement('div');
+    ex.className = 'cal-exam' + (red ? ' red' : '');
+    const subj = exams[0].s;
+    const isCn = exams[0].cn;
+    let html = `<div class="s${isCn ? ' cn' : ''}">${subj}</div>`;
+    exams.forEach((e, i) => {
+      html += `<div class="p${i > 0 ? ' second' : ''}">${e.p}</div>`;
     });
+    ex.innerHTML = html;
+    cell.appendChild(ex);
+  }
 
-    // Build exam blocks
-    const track = row.querySelector('.tl-track');
-    TL_DATA[name].forEach(ex => {
-      const [di, slot, subj, paper, dur, isRed] = ex;
-      const el = document.createElement('div');
-      const slotBottom = {
-        PM: 0,
-        AM2: 0,
-        AM: 48,
-        PM2: 48,
-      };
-      el.className = 'tl-exam' + (isRed ? ' red' : '');
-      const widthPct = (1 / 24) * 100 * 0.88;
-      const leftPct = ((di + 0.06) / 24) * 100;
-      el.style.left = `${leftPct}%`;
-      el.style.width = `${widthPct}%`;
-      el.style.bottom = `${slotBottom[slot] ?? 0}px`;
-      el.innerHTML = `<div class="subj">${subj}</div><div class="paper">${paper} · ${dur}</div>`;
-      track.appendChild(el);
-    });
+  // Student blocks
+  let row = 2;
+  Object.entries(CAL).forEach(([name, info]) => {
+    // Label (col 1, span 2 rows)
+    const lbl = document.createElement('div');
+    lbl.className = 'cal-lbl';
+    lbl.style.gridColumn = '1';
+    lbl.style.gridRow = `${row} / span 2`;
+    lbl.innerHTML = `<div class="n">${name}</div><div class="m">${info.meta}</div>`;
+    cal.appendChild(lbl);
 
-    container.appendChild(row);
+    // AM label
+    const amLbl = document.createElement('div');
+    amLbl.className = 'cal-slot-lbl am';
+    amLbl.style.gridColumn = '2';
+    amLbl.style.gridRow = `${row}`;
+    amLbl.textContent = 'AM';
+    cal.appendChild(amLbl);
+
+    // AM cells
+    for (let d = 0; d < 24; d++) {
+      const c = document.createElement('div');
+      c.className = 'cal-cell am' + (DAYS[d][2] === 'weekend' ? ' weekend' : '');
+      c.style.gridColumn = `${3 + d}`;
+      c.style.gridRow = `${row}`;
+      renderSlot(c, info.slots.find(s => s[0] === d && s[1] === 'AM'));
+      cal.appendChild(c);
+    }
+
+    // PM label
+    const pmLbl = document.createElement('div');
+    pmLbl.className = 'cal-slot-lbl pm';
+    pmLbl.style.gridColumn = '2';
+    pmLbl.style.gridRow = `${row + 1}`;
+    pmLbl.textContent = 'PM';
+    cal.appendChild(pmLbl);
+
+    // PM cells
+    for (let d = 0; d < 24; d++) {
+      const c = document.createElement('div');
+      c.className = 'cal-cell pm' + (DAYS[d][2] === 'weekend' ? ' weekend' : '');
+      c.style.gridColumn = `${3 + d}`;
+      c.style.gridRow = `${row + 1}`;
+      renderSlot(c, info.slots.find(s => s[0] === d && s[1] === 'PM'));
+      cal.appendChild(c);
+    }
+
+    row += 2;
   });
 }
 
 buildMatrix();
-buildTimelines();
+buildCalendar();
 </script>
 
 </body>
