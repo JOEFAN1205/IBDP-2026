@@ -964,6 +964,257 @@
     margin-bottom: 6px;
   }
 
+  /* ========== SECTION 07: MASTER SCHEDULE ========== */
+  .schedule-wrap {
+    padding: 26px 28px 32px;
+    background: var(--paper-hi);
+    border-bottom: 1px solid var(--line);
+  }
+  .sched-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 4px 2px 14px;
+    border-bottom: 1px solid var(--line-soft);
+    margin-bottom: 0;
+  }
+  .sched-meta .cnote {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 12px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ink-soft);
+    font-weight: 700;
+  }
+  .sched-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    table-layout: fixed;
+  }
+  .sched-table col.c-date { width: 82px; }
+  .sched-table col.c-slot { width: 56px; }
+  .sched-table col.c-time { width: 72px; }
+  .sched-table col.c-subj { width: auto; }
+  .sched-table col.c-lvl  { width: 58px; }
+  .sched-table col.c-comp { width: 130px; }
+  .sched-table col.c-len  { width: 78px; }
+
+  .sched-table thead th {
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 900;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 10px 12px;
+    background: var(--paper-2);
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+    border-right: 1px dashed var(--line-inner-dash);
+  }
+  .sched-table thead th:last-child { border-right: none; text-align: right; }
+  .sched-table thead th.th-num { text-align: right; }
+
+  /* Date group divider row (spans all columns) */
+  .sched-table tr.sched-day td {
+    background: var(--accent-soft);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line-soft);
+    padding: 8px 14px;
+  }
+  .sched-day .day-inner {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    width: 100%;
+  }
+  .sched-day .day-date {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    line-height: 1;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+  .sched-day .day-dow {
+    font-weight: 700;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+  .sched-day .day-count {
+    margin-left: auto;
+    font-size: 10px;
+    color: var(--accent-deep);
+    font-weight: 700;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+  .sched-day .day-red {
+    color: var(--alert-deep);
+  }
+
+  /* Exam rows */
+  .sched-table tr.sched-row td {
+    padding: 9px 12px;
+    border-bottom: 1px dashed var(--line-inner-dash);
+    border-right: 1px dashed var(--line-inner-dash);
+    vertical-align: middle;
+    color: var(--ink);
+    background: var(--paper-hi);
+  }
+  .sched-table tr.sched-row td:last-child { border-right: none; }
+  .sched-table tr.sched-row.odd td {
+    background: rgba(48,40,33,0.03);
+  }
+  .sched-table tr.sched-row:hover td {
+    background: rgba(85,117,163,0.08);
+  }
+
+  .sc-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    color: var(--muted);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+  }
+  .sc-slot {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+  .sc-slot.am { color: var(--accent-deep); }
+  .sc-slot.pm { color: var(--alert-deep); }
+  .sc-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--ink);
+  }
+  .sc-subj {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 12.5px;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+  }
+  .sc-subj .cjk {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 700;
+    margin-right: 4px;
+  }
+  .sc-lvl {
+    display: inline-block;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 2px;
+    line-height: 1;
+  }
+  .sc-lvl.hl {
+    background: var(--red-deep);
+    color: var(--paper-hi);
+  }
+  .sc-lvl.sl {
+    background: transparent;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+  }
+  .sc-comp {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .sc-len {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    text-align: right;
+    line-height: 1;
+  }
+  .sc-len small {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-left: 2px;
+  }
+  .sc-len.long { color: var(--alert-deep); }
+
+  /* Schedule legend */
+  .sched-legend {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 14px 2px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .sched-legend .chip {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 2px;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    margin-right: 6px;
+    line-height: 1;
+  }
+  .sched-legend .chip.hl {
+    background: var(--red-deep);
+    color: var(--paper-hi);
+  }
+  .sched-legend .chip.sl {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+  }
+  .sched-legend .dot-am {
+    display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent-deep); margin-right: 6px; vertical-align: -1px;
+  }
+  .sched-legend .dot-pm {
+    display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+    background: var(--alert-deep); margin-right: 6px; vertical-align: -1px;
+  }
+
+  @media (max-width: 900px) {
+    .schedule-wrap { padding: 18px 18px 22px; }
+    .sched-table { font-size: 10.5px; }
+    .sched-table thead th { font-size: 9px; padding: 8px 8px; }
+    .sched-table tr.sched-row td { padding: 7px 8px; }
+    .sched-table col.c-comp { width: 100px; }
+    .sched-table col.c-date { width: 64px; }
+    .sched-table col.c-time { width: 58px; }
+    .sched-table col.c-slot { width: 44px; }
+    .sched-day .day-date { font-size: 15px; }
+    .sc-subj { font-size: 11.5px; }
+    .sc-len { font-size: 12px; }
+  }
+
   /* ========== CORNER TICKS ========== */
   .corner {
     position: absolute;
@@ -1011,6 +1262,8 @@
   .peaks,
   .peak-grid,
   .peak-card,
+  .schedule-wrap,
+  .sched-table thead th,
   .footer > div {
     border-color: var(--line-inner);
   }
@@ -1633,10 +1886,400 @@
     </div>
   </div>
 
+  <!-- ========== SECTION 07: MASTER SCHEDULE ========== -->
+  <div class="section-head">
+    <div class="section-num">0<span>7</span></div>
+    <div class="section-title">
+      <h2>SCHEDULE / 考试日程表</h2>
+      <div class="cn">全量排期。26 场笔试，按日期升序。HL 红标；SL 灰标。三卷以上日期以红字计数。数据出处：IB May 2026 官方考期表。</div>
+    </div>
+    <div class="section-rule">§ VII / MASTER SCHEDULE</div>
+  </div>
+
+  <div class="schedule-wrap">
+    <div class="sched-meta">
+      <span>SOURCE / IBIS OFFICIAL EXAM SCHEDULE · 13 EXAM DATES · 26 PAPERS · 2026-04-27 → 2026-05-20</span>
+      <span class="cnote">原始表 · 按日分组</span>
+    </div>
+
+    <table class="sched-table">
+      <colgroup>
+        <col class="c-date">
+        <col class="c-slot">
+        <col class="c-time">
+        <col class="c-subj">
+        <col class="c-lvl">
+        <col class="c-comp">
+        <col class="c-len">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Slot</th>
+          <th>Time</th>
+          <th>Subject / 科目</th>
+          <th>Level</th>
+          <th>Component</th>
+          <th class="th-num">Length</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- DAY 01: 27 APR MON -->
+        <tr class="sched-day"><td colspan="7">
+          <div class="day-inner">
+            <span class="day-date">27 APR</span><span class="day-dow">Monday</span>
+          <span class="day-count">01 PAPER · OPENING</span>
+          </div>
+        </td></tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">27/04</td>
+          <td class="sc-slot pm">PM</td>
+          <td class="sc-time">13:30</td>
+          <td class="sc-subj"><span class="cjk">中文 A</span> LAL</td>
+          <td><span class="sc-lvl sl">SL</span></td>
+          <td class="sc-comp">Paper One</td>
+          <td class="sc-len">75<small>min</small></td>
+        </tr>
+
+        <!-- DAY 02: 28 APR TUE -->
+        <tr class="sched-day"><td colspan="7">
+          <div class="day-inner">
+            <span class="day-date">28 APR</span><span class="day-dow">Tuesday</span>
+          <span class="day-count day-red">03 PAPERS · HEAVY</span>
+          </div>
+        </td></tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">28/04</td>
+          <td class="sc-slot am">AM</td>
+          <td class="sc-time">09:30</td>
+          <td class="sc-subj"><span class="cjk">中文 A</span> LAL</td>
+          <td><span class="sc-lvl sl">SL</span></td>
+          <td class="sc-comp">Paper Two</td>
+          <td class="sc-len">105<small>min</small></td>
+        </tr>
+        <tr class="sched-row">
+          <td class="sc-date">28/04</td>
+          <td class="sc-slot pm">PM</td>
+          <td class="sc-time">13:30</td>
+          <td class="sc-subj">Physics</td>
+          <td><span class="sc-lvl hl">HL</span></td>
+          <td class="sc-comp">Paper One</td>
+          <td class="sc-len long">120<small>min</small></td>
+        </tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">28/04</td>
+          <td class="sc-slot pm">PM</td>
+          <td class="sc-time">13:30</td>
+          <td class="sc-subj">Physics</td>
+          <td><span class="sc-lvl sl">SL</span></td>
+          <td class="sc-comp">Paper One</td>
+          <td class="sc-len">90<small>min</small></td>
+        </tr>
+
+        <!-- DAY 03: 29 APR WED -->
+        <tr class="sched-day"><td colspan="7">
+          <div class="day-inner">
+            <span class="day-date">29 APR</span><span class="day-dow">Wednesday</span>
+          <span class="day-count day-red">03 PAPERS · HEAVY</span>
+          </div>
+        </td></tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">29/04</td>
+          <td class="sc-slot am">AM</td>
+          <td class="sc-time">09:30</td>
+          <td class="sc-subj">Physics</td>
+          <td><span class="sc-lvl hl">HL</span></td>
+          <td class="sc-comp">Paper Two</td>
+          <td class="sc-len long">150<small>min</small></td>
+        </tr>
+        <tr class="sched-row">
+          <td class="sc-date">29/04</td>
+          <td class="sc-slot am">AM</td>
+          <td class="sc-time">09:30</td>
+          <td class="sc-subj">Physics</td>
+          <td><span class="sc-lvl sl">SL</span></td>
+          <td class="sc-comp">Paper Two</td>
+          <td class="sc-len">90<small>min</small></td>
+        </tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">29/04</td>
+          <td class="sc-slot pm">PM</td>
+          <td class="sc-time">13:30</td>
+          <td class="sc-subj">Business Management</td>
+          <td><span class="sc-lvl sl">SL</span></td>
+          <td class="sc-comp">Paper One</td>
+          <td class="sc-len">90<small>min</small></td>
+        </tr>
+
+        <!-- DAY 04: 30 APR THU -->
+        <tr class="sched-day"><td colspan="7">
+          <div class="day-inner">
+            <span class="day-date">30 APR</span><span class="day-dow">Thursday</span>
+          <span class="day-count">01 PAPER</span>
+          </div>
+        </td></tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">30/04</td>
+          <td class="sc-slot am">AM</td>
+          <td class="sc-time">09:30</td>
+          <td class="sc-subj">Business Management</td>
+          <td><span class="sc-lvl sl">SL</span></td>
+          <td class="sc-comp">Paper Two</td>
+          <td class="sc-len">90<small>min</small></td>
+        </tr>
+
+        <!-- DAY 05: 07 MAY THU -->
+        <tr class="sched-day"><td colspan="7">
+          <div class="day-inner">
+            <span class="day-date">07 MAY</span><span class="day-dow">Thursday</span>
+          <span class="day-count">02 PAPERS · SAME SLOT</span>
+          </div>
+        </td></tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">07/05</td>
+          <td class="sc-slot pm">PM</td>
+          <td class="sc-time">13:30</td>
+          <td class="sc-subj">English B</td>
+          <td><span class="sc-lvl hl">HL</span></td>
+          <td class="sc-comp">Paper One</td>
+          <td class="sc-len">90<small>min</small></td>
+        </tr>
+        <tr class="sched-row">
+          <td class="sc-date">07/05</td>
+          <td class="sc-slot pm">PM</td>
+          <td class="sc-time">13:30</td>
+          <td class="sc-subj">English B</td>
+          <td><span class="sc-lvl hl">HL</span></td>
+          <td class="sc-comp">Paper Two · Reading</td>
+          <td class="sc-len">60<small>min</small></td>
+        </tr>
+
+        <!-- DAY 06: 08 MAY FRI -->
+        <tr class="sched-day"><td colspan="7">
+          <div class="day-inner">
+            <span class="day-date">08 MAY</span><span class="day-dow">Friday</span>
+          <span class="day-count">01 PAPER</span>
+          </div>
+        </td></tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">08/05</td>
+          <td class="sc-slot am">AM</td>
+          <td class="sc-time">09:30</td>
+          <td class="sc-subj">English B</td>
+          <td><span class="sc-lvl hl">HL</span></td>
+          <td class="sc-comp">Paper Two · Listening</td>
+          <td class="sc-len">60<small>min</small></td>
+        </tr>
+
+        <!-- DAY 07: 12 MAY TUE -->
+        <tr class="sched-day"><td colspan="7">
+          <div class="day-inner">
+            <span class="day-date">12 MAY</span><span class="day-dow">Tuesday</span>
+          <span class="day-count">02 PAPERS · SAME SLOT</span>
+          </div>
+        </td></tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">12/05</td>
+          <td class="sc-slot pm">PM</td>
+          <td class="sc-time">13:30</td>
+          <td class="sc-subj">Economics</td>
+          <td><span class="sc-lvl hl">HL</span></td>
+          <td class="sc-comp">Paper Two</td>
+          <td class="sc-len">105<small>min</small></td>
+        </tr>
+        <tr class="sched-row">
+          <td class="sc-date">12/05</td>
+          <td class="sc-slot pm">PM</td>
+          <td class="sc-time">13:30</td>
+          <td class="sc-subj">Economics</td>
+          <td><span class="sc-lvl sl">SL</span></td>
+          <td class="sc-comp">Paper Two</td>
+          <td class="sc-len">105<small>min</small></td>
+        </tr>
+
+        <!-- DAY 08: 13 MAY WED -->
+        <tr class="sched-day"><td colspan="7">
+          <div class="day-inner">
+            <span class="day-date">13 MAY</span><span class="day-dow">Wednesday</span>
+          <span class="day-count day-red">03 PAPERS · HEAVY</span>
+          </div>
+        </td></tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">13/05</td>
+          <td class="sc-slot am">AM</td>
+          <td class="sc-time">09:30</td>
+          <td class="sc-subj">Economics</td>
+          <td><span class="sc-lvl hl">HL</span></td>
+          <td class="sc-comp">Paper One</td>
+          <td class="sc-len">75<small>min</small></td>
+        </tr>
+        <tr class="sched-row">
+          <td class="sc-date">13/05</td>
+          <td class="sc-slot am">AM</td>
+          <td class="sc-time">09:30</td>
+          <td class="sc-subj">Economics</td>
+          <td><span class="sc-lvl hl">HL</span></td>
+          <td class="sc-comp">Paper Three</td>
+          <td class="sc-len">105<small>min</small></td>
+        </tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">13/05</td>
+          <td class="sc-slot am">AM</td>
+          <td class="sc-time">09:30</td>
+          <td class="sc-subj">Economics</td>
+          <td><span class="sc-lvl sl">SL</span></td>
+          <td class="sc-comp">Paper One</td>
+          <td class="sc-len">75<small>min</small></td>
+        </tr>
+
+        <!-- DAY 09: 14 MAY THU -->
+        <tr class="sched-day"><td colspan="7">
+          <div class="day-inner">
+            <span class="day-date">14 MAY</span><span class="day-dow">Thursday</span>
+          <span class="day-count">01 PAPER</span>
+          </div>
+        </td></tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">14/05</td>
+          <td class="sc-slot pm">PM</td>
+          <td class="sc-time">13:30</td>
+          <td class="sc-subj">Math Analysis &amp; Approaches</td>
+          <td><span class="sc-lvl hl">HL</span></td>
+          <td class="sc-comp">Paper One</td>
+          <td class="sc-len long">120<small>min</small></td>
+        </tr>
+
+        <!-- DAY 10: 15 MAY FRI -->
+        <tr class="sched-day"><td colspan="7">
+          <div class="day-inner">
+            <span class="day-date">15 MAY</span><span class="day-dow">Friday</span>
+          <span class="day-count day-red">03 PAPERS · PEAK DAY</span>
+          </div>
+        </td></tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">15/05</td>
+          <td class="sc-slot am">AM</td>
+          <td class="sc-time">09:30</td>
+          <td class="sc-subj">Math Analysis &amp; Approaches</td>
+          <td><span class="sc-lvl hl">HL</span></td>
+          <td class="sc-comp">Paper Two</td>
+          <td class="sc-len long">120<small>min</small></td>
+        </tr>
+        <tr class="sched-row">
+          <td class="sc-date">15/05</td>
+          <td class="sc-slot pm">PM</td>
+          <td class="sc-time">13:30</td>
+          <td class="sc-subj">Chemistry</td>
+          <td><span class="sc-lvl hl">HL</span></td>
+          <td class="sc-comp">Paper One</td>
+          <td class="sc-len long">120<small>min</small></td>
+        </tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">15/05</td>
+          <td class="sc-slot pm">PM</td>
+          <td class="sc-time">13:30</td>
+          <td class="sc-subj">Chemistry</td>
+          <td><span class="sc-lvl sl">SL</span></td>
+          <td class="sc-comp">Paper One</td>
+          <td class="sc-len">90<small>min</small></td>
+        </tr>
+
+        <!-- DAY 11: 18 MAY MON -->
+        <tr class="sched-day"><td colspan="7">
+          <div class="day-inner">
+            <span class="day-date">18 MAY</span><span class="day-dow">Monday</span>
+          <span class="day-count">02 PAPERS · SAME SLOT</span>
+          </div>
+        </td></tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">18/05</td>
+          <td class="sc-slot am">AM</td>
+          <td class="sc-time">09:30</td>
+          <td class="sc-subj">Chemistry</td>
+          <td><span class="sc-lvl hl">HL</span></td>
+          <td class="sc-comp">Paper Two</td>
+          <td class="sc-len long">150<small>min</small></td>
+        </tr>
+        <tr class="sched-row">
+          <td class="sc-date">18/05</td>
+          <td class="sc-slot am">AM</td>
+          <td class="sc-time">09:30</td>
+          <td class="sc-subj">Chemistry</td>
+          <td><span class="sc-lvl sl">SL</span></td>
+          <td class="sc-comp">Paper Two</td>
+          <td class="sc-len">90<small>min</small></td>
+        </tr>
+
+        <!-- DAY 12: 19 MAY TUE -->
+        <tr class="sched-day"><td colspan="7">
+          <div class="day-inner">
+            <span class="day-date">19 MAY</span><span class="day-dow">Tuesday</span>
+          <span class="day-count">02 PAPERS · SAME SLOT</span>
+          </div>
+        </td></tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">19/05</td>
+          <td class="sc-slot pm">PM</td>
+          <td class="sc-time">13:30</td>
+          <td class="sc-subj">French ab initio</td>
+          <td><span class="sc-lvl sl">SL</span></td>
+          <td class="sc-comp">Paper One</td>
+          <td class="sc-len">60<small>min</small></td>
+        </tr>
+        <tr class="sched-row">
+          <td class="sc-date">19/05</td>
+          <td class="sc-slot pm">PM</td>
+          <td class="sc-time">13:30</td>
+          <td class="sc-subj">French ab initio</td>
+          <td><span class="sc-lvl sl">SL</span></td>
+          <td class="sc-comp">Paper Two · Reading</td>
+          <td class="sc-len">60<small>min</small></td>
+        </tr>
+
+        <!-- DAY 13: 20 MAY WED -->
+        <tr class="sched-day"><td colspan="7">
+          <div class="day-inner">
+            <span class="day-date">20 MAY</span><span class="day-dow">Wednesday</span>
+          <span class="day-count">02 PAPERS · CLOSING</span>
+          </div>
+        </td></tr>
+        <tr class="sched-row odd">
+          <td class="sc-date">20/05</td>
+          <td class="sc-slot am">AM</td>
+          <td class="sc-time">09:30</td>
+          <td class="sc-subj">French ab initio</td>
+          <td><span class="sc-lvl sl">SL</span></td>
+          <td class="sc-comp">Paper Two · Listening</td>
+          <td class="sc-len">45<small>min</small></td>
+        </tr>
+        <tr class="sched-row">
+          <td class="sc-date">20/05</td>
+          <td class="sc-slot pm">PM</td>
+          <td class="sc-time">13:30</td>
+          <td class="sc-subj">Math Analysis &amp; Approaches</td>
+          <td><span class="sc-lvl hl">HL</span></td>
+          <td class="sc-comp">Paper Three</td>
+          <td class="sc-len">75<small>min</small></td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <div class="sched-legend">
+      <span><span class="chip hl">HL</span>Higher Level</span>
+      <span><span class="chip sl">SL</span>Standard Level</span>
+      <span><span class="dot-am"></span>AM · 09:30</span>
+      <span><span class="dot-pm"></span>PM · 13:30</span>
+      <span style="color:var(--alert-deep);">◼ LONG PAPER ≥ 120 MIN</span>
+      <span style="margin-left:auto;">ALL TIMES LOCAL · 26 PAPERS TOTAL</span>
+    </div>
+  </div>
+
   <!-- ========== FOOTER ========== -->
   <div class="footer">
     <div>
-      <div class="big">SHEET END / §07</div>
+      <div class="big">SHEET END / §08</div>
       COMPILED 2026 · IB MAY SESSION<br>
       TYPESET / ARCHIVO · NOTO SERIF SC · JETBRAINS MONO
     </div>
