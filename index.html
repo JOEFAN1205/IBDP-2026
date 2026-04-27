@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2026 MAY IB / 外部笔试对照矩阵</title>
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&amp;family=Archivo+Black&amp;family=JetBrains+Mono:wght@300;400;500;600;700&amp;family=Noto+Serif+SC:wght@400;700;900&amp;display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #F4ECDF;
@@ -359,7 +360,8 @@
     align-items: center;
     position: relative;
   }
-  .matrix .mh.weekend { background: var(--accent-soft); }
+  .matrix .mh.weekend,
+  .matrix .mh.holiday { background: var(--accent-soft); }
   .matrix .mh.first, .matrix .mh.last { background: var(--ink); color: var(--paper); }
   .matrix .mh-date {
     font-size: 12px;
@@ -373,7 +375,8 @@
     margin-top: 2px;
   }
   .matrix .mh.first .mh-dow, .matrix .mh.last .mh-dow { color: var(--paper); opacity: 0.7; }
-  .matrix .mh.weekend .mh-dow { color: var(--ink); opacity: 0.6; }
+  .matrix .mh.weekend .mh-dow,
+  .matrix .mh.holiday .mh-dow { color: var(--ink); opacity: 0.6; }
   .matrix .mh-corner {
     background: var(--accent-deep);
     color: var(--paper);
@@ -402,7 +405,8 @@
     text-align: center;
     font-size: 10px;
   }
-  .matrix .mc.weekend { background: repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(103,92,81,0.07) 4px, rgba(103,92,81,0.07) 5px); }
+  .matrix .mc.weekend,
+  .matrix .mc.holiday { background: repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(103,92,81,0.07) 4px, rgba(103,92,81,0.07) 5px); }
   .matrix .mc-name {
     border-right: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
@@ -549,7 +553,8 @@
     align-items: center;
     min-height: 44px;
   }
-  .cal-date.weekend { background: var(--accent-soft); }
+  .cal-date.weekend,
+  .cal-date.holiday { background: var(--accent-soft); }
   .cal-date.first, .cal-date.last { background: var(--ink); color: var(--paper); }
   .cal-date.peak-col { background: var(--red); color: var(--paper); }
   .cal-date-d { font-size: 11px; font-weight: 700; font-family: 'Archivo', sans-serif; line-height: 1; }
@@ -610,7 +615,8 @@
   }
   .cal-cell.am { border-bottom: 1px dashed var(--line-dash); }
   .cal-cell.pm { border-bottom: 1px solid var(--line); }
-  .cal-cell.weekend {
+  .cal-cell.weekend,
+  .cal-cell.holiday {
     background: repeating-linear-gradient(45deg, var(--paper), var(--paper) 3px, rgba(103,92,81,0.08) 3px, rgba(103,92,81,0.08) 4px);
   }
 
@@ -969,6 +975,10 @@
     padding: 26px 28px 32px;
     background: var(--paper-hi);
     border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) transparent;
   }
   .sched-meta {
     display: flex;
@@ -1213,6 +1223,247 @@
     .sched-day .day-date { font-size: 15px; }
     .sc-subj { font-size: 11.5px; }
     .sc-len { font-size: 12px; }
+  }
+
+  /* ---------- LIVE STATUS BANNER (Section 07) ---------- */
+  .sched-status-banner {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 0;
+    margin: 14px 0 18px;
+    border: 1.5px solid var(--line-strong);
+    background: var(--paper-2);
+    position: relative;
+    overflow: hidden;
+  }
+  .sched-status-banner::before {
+    content: "LIVE / 实时";
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--alert-deep);
+    color: var(--paper-hi);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    padding: 3px 8px 4px;
+    z-index: 2;
+  }
+  .sched-status-banner .ssb-cell {
+    padding: 22px 18px 14px;
+    border-right: 1.5px solid var(--line-strong);
+    position: relative;
+  }
+  .sched-status-banner .ssb-cell:last-child { border-right: none; }
+  .sched-status-banner .ssb-label {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .ssb-clock-time {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 28px;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .ssb-clock-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+  .ssb-countdown {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 26px;
+    letter-spacing: -0.005em;
+    color: var(--accent-deep);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .ssb-countdown.live {
+    color: var(--alert-deep);
+  }
+  .ssb-countdown.all-done {
+    color: var(--accent-deep);
+    font-size: 18px;
+    letter-spacing: 0.04em;
+  }
+  .ssb-subj {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 12.5px;
+    color: var(--ink);
+    margin-top: 8px;
+    letter-spacing: 0.02em;
+  }
+  .ssb-subj .ssb-tag {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    padding: 2px 6px;
+    margin-right: 6px;
+    border-radius: 2px;
+    vertical-align: 1px;
+  }
+  .ssb-subj .ssb-tag.next { background: var(--accent-deep); color: var(--paper-hi); }
+  .ssb-subj .ssb-tag.live { background: var(--alert-deep); color: var(--paper-hi); }
+  .ssb-progress {
+    margin-top: 10px;
+    height: 4px;
+    background: var(--paper-hi);
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .ssb-progress-fill {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    background: var(--alert-deep);
+    width: 0%;
+    transition: width 0.5s linear;
+  }
+  .ssb-meta-tot {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--muted);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-top: 8px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .ssb-meta-tot b {
+    font-family: 'Archivo Black', sans-serif;
+    color: var(--ink);
+    font-weight: 900;
+    margin-right: 3px;
+  }
+
+  /* ---------- ROW STATES ---------- */
+  /* DONE: one continuous strikethrough line painted as a row-spanning background gradient */
+  .sched-table tr.sched-row.exam-done td {
+    color: var(--muted) !important;
+    background-color: rgba(48,40,33,0.04) !important;
+    background-image: linear-gradient(
+      to bottom,
+      transparent calc(50% - 0.6px),
+      rgba(116, 100, 87, 0.85) calc(50% - 0.6px),
+      rgba(116, 100, 87, 0.85) calc(50% + 0.6px),
+      transparent calc(50% + 0.6px)
+    ) !important;
+    text-decoration: none !important;
+  }
+  /* Chips and badges sit on top of the line, opaque to mask it cleanly */
+  .sched-table tr.sched-row.exam-done .sc-lvl.hl {
+    background-color: rgba(55,85,127,0.40) !important;
+    background-image: none !important;
+    color: var(--paper-hi);
+  }
+  .sched-table tr.sched-row.exam-done .sc-lvl.sl {
+    background-color: var(--paper-hi) !important;
+    background-image: none !important;
+    color: var(--muted);
+    border-color: var(--line-soft);
+  }
+
+  /* LIVE: highlighted, currently happening */
+  .sched-table tr.sched-row.exam-live td {
+    background: var(--alert-soft) !important;
+    color: var(--ink) !important;
+    box-shadow: inset 4px 0 0 var(--alert-deep);
+  }
+  .sched-table tr.sched-row.exam-live .sc-subj {
+    color: var(--alert-deep);
+  }
+
+  /* NEXT: the very next upcoming exam */
+  .sched-table tr.sched-row.exam-next td {
+    background: var(--accent-soft) !important;
+    box-shadow: inset 4px 0 0 var(--accent-deep);
+  }
+  .sched-table tr.sched-row.exam-next .sc-subj {
+    color: var(--accent-deep);
+  }
+
+  /* Status pill — pinned to the right edge of Subject cell, aligned against the Level column line */
+  .sched-table tr.sched-row .sc-subj {
+    position: relative;
+    padding-right: 132px;
+  }
+  .ex-status {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 3px 7px 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    border: 1px solid currentColor;
+    text-align: center;
+    white-space: nowrap;
+    color: var(--muted);
+    background: var(--paper-hi);
+    text-decoration: none !important;
+    font-variant-numeric: tabular-nums;
+    z-index: 2;
+    box-sizing: border-box;
+    min-width: 118px;
+  }
+  .ex-status.done {
+    color: var(--muted);
+    border-color: var(--line-soft);
+    background: var(--paper-hi);
+  }
+  .ex-status.live {
+    color: var(--paper-hi);
+    background: var(--alert-deep);
+    border-color: var(--alert-deep);
+    animation: pulse-live 1.4s ease-in-out infinite;
+  }
+  .ex-status.next {
+    color: var(--paper-hi);
+    background: var(--accent-deep);
+    border-color: var(--accent-deep);
+  }
+  .ex-status.upcoming {
+    color: var(--ink-soft);
+    border-color: var(--line);
+    background: var(--paper-hi);
+  }
+  @keyframes pulse-live {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
+  }
+
+  /* Day header status overlays */
+  .day-count.day-done { color: var(--muted) !important; }
+  .day-count.day-live { color: var(--alert-deep) !important; }
+  .day-count.day-next { color: var(--accent-deep) !important; }
+
+  @media (max-width: 900px) {
+    .sched-status-banner { grid-template-columns: 1fr; }
+    .sched-status-banner .ssb-cell { border-right: none; border-bottom: 1.5px solid var(--line-strong); }
+    .sched-status-banner .ssb-cell:last-child { border-bottom: none; }
+    .ssb-clock-time { font-size: 22px; }
+    .ssb-countdown { font-size: 20px; }
+    .sched-table tr.sched-row .sc-subj { padding-right: 108px; }
+    .ex-status {
+      font-size: 9px;
+      padding: 2px 5px 3px;
+      letter-spacing: 0.04em;
+      right: 4px;
+      min-width: 100px;
+    }
   }
 
   /* ========== CORNER TICKS ========== */
@@ -1605,7 +1856,7 @@
       </div>
       <span style="margin-left:4px;">0 → 60 → 120 → 180 → 240 MIN</span>
       <span style="margin-left:20px;"><span class="peak-dot"></span>PERSONAL PEAK DAY / 本人峰值日</span>
-      <span style="margin-left:20px;">◩ WEEKEND / 周末空档</span>
+      <span style="margin-left:20px;">◩ WEEKEND / HOLIDAY BUFFER / 周末或假期空档</span>
     </div>
   </div>
 
@@ -1625,7 +1876,7 @@
     <div class="cal-legend">
       <span><span class="sw bk"></span>SINGLE / 普通单卷</span>
       <span><span class="sw rd"></span>DOUBLE / 同场双卷或同日双考</span>
-      <span><span class="sw we"></span>WEEKEND / 周末空档</span>
+      <span><span class="sw we"></span>WEEKEND / HOLIDAY BUFFER / 周末或假期空档</span>
       <span style="margin-left:auto;">DASH = AM/PM 内分隔 · SOLID = 日分隔</span>
     </div>
   </div>
@@ -1900,6 +2151,26 @@
     <div class="sched-meta">
       <span>SOURCE / IBIS OFFICIAL EXAM SCHEDULE · 13 EXAM DATES · 26 PAPERS · 2026-04-27 → 2026-05-20</span>
       <span class="cnote">原始表 · 按日分组</span>
+    </div>
+
+    <div class="sched-status-banner" id="schedStatusBanner">
+      <div class="ssb-cell">
+        <div class="ssb-label">CURRENT TIME / 当前时间</div>
+        <div class="ssb-clock-time" id="ssbClockTime">--:--:--</div>
+        <div class="ssb-clock-meta" id="ssbClockMeta">— · DEVICE LOCAL TIME</div>
+        <div class="ssb-meta-tot" id="ssbProgress">
+          <span><b id="ssbDoneCount">0</b>/ 26 PAPERS DONE</span>
+          <span><b id="ssbDoneDays">0</b>/ 13 DAYS CLEARED</span>
+        </div>
+      </div>
+      <div class="ssb-cell">
+        <div class="ssb-label" id="ssbNextLabel">NEXT EXAM / 下一场考试</div>
+        <div class="ssb-countdown" id="ssbCountdown">— —</div>
+        <div class="ssb-subj" id="ssbSubj">—</div>
+        <div class="ssb-progress" id="ssbProgressBar" style="display:none;">
+          <div class="ssb-progress-fill" id="ssbProgressFill"></div>
+        </div>
+      </div>
     </div>
 
     <table class="sched-table">
@@ -2305,7 +2576,7 @@
 // ========== DATA ==========
 const DAYS = [
   ['04/27','MON','first'],['04/28','TUE',''],['04/29','WED',''],['04/30','THU',''],
-  ['05/01','FRI','weekend'],['05/02','SAT','weekend'],['05/03','SUN','weekend'],
+  ['05/01','FRI','holiday'],['05/02','SAT','weekend'],['05/03','SUN','weekend'],
   ['05/04','MON',''],['05/05','TUE',''],['05/06','WED',''],
   ['05/07','THU',''],['05/08','FRI',''],
   ['05/09','SAT','weekend'],['05/10','SUN','weekend'],
@@ -2314,6 +2585,10 @@ const DAYS = [
   ['05/16','SAT','weekend'],['05/17','SUN','weekend'],
   ['05/18','MON',''],['05/19','TUE',''],['05/20','WED','last'],
 ];
+
+function isBufferDay(cls) {
+  return cls === 'weekend' || cls === 'holiday';
+}
 
 // Format: [papers, minutes]
 const ALICE = [[1,75],[1,105],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[2,150],[1,60],[0,0],[0,0],[0,0],[1,105],[2,180],[1,120],[2,210],[0,0],[0,0],[1,90],[2,135],[2,120]];
@@ -2362,7 +2637,7 @@ function buildMatrix() {
     let totPapers = 0, totMins = 0;
     s.data.forEach(([p, mins], di) => {
       const c = document.createElement('div');
-      c.className = 'mc' + (isLast ? ' last-row' : '') + (DAYS[di][2] === 'weekend' ? ' weekend' : '');
+      c.className = 'mc' + (isLast ? ' last-row' : '') + (isBufferDay(DAYS[di][2]) ? ' ' + DAYS[di][2] : '');
       if (isLast) c.style.borderBottom = 'none';
       if (di === s.peak) c.classList.add('cell-peak');
 
@@ -2543,7 +2818,7 @@ function buildCalendar() {
     // AM cells
     for (let d = 0; d < 24; d++) {
       const c = document.createElement('div');
-      c.className = 'cal-cell am' + (DAYS[d][2] === 'weekend' ? ' weekend' : '');
+      c.className = 'cal-cell am' + (isBufferDay(DAYS[d][2]) ? ' ' + DAYS[d][2] : '');
       c.style.gridColumn = `${3 + d}`;
       c.style.gridRow = `${row}`;
       renderSlot(c, info.slots.find(s => s[0] === d && s[1] === 'AM'));
@@ -2561,7 +2836,7 @@ function buildCalendar() {
     // PM cells
     for (let d = 0; d < 24; d++) {
       const c = document.createElement('div');
-      c.className = 'cal-cell pm' + (DAYS[d][2] === 'weekend' ? ' weekend' : '');
+      c.className = 'cal-cell pm' + (isBufferDay(DAYS[d][2]) ? ' ' + DAYS[d][2] : '');
       c.style.gridColumn = `${3 + d}`;
       c.style.gridRow = `${row + 1}`;
       renderSlot(c, info.slots.find(s => s[0] === d && s[1] === 'PM'));
@@ -2574,6 +2849,257 @@ function buildCalendar() {
 
 buildMatrix();
 buildCalendar();
+
+// ========== LIVE EXAM STATUS (Section 07) ==========
+(function () {
+  const EXAM_YEAR = 2026;
+  const rows = Array.from(document.querySelectorAll('.sched-table tr.sched-row'));
+  const dayHeaders = Array.from(document.querySelectorAll('.sched-table tr.sched-day'));
+  const exams = [];
+
+  rows.forEach(row => {
+    const dateText = (row.querySelector('.sc-date') || {}).textContent;
+    const timeText = (row.querySelector('.sc-time') || {}).textContent;
+    const lenText  = (row.querySelector('.sc-len')  || {}).textContent;
+    if (!dateText || !timeText) return;
+
+    const dm = dateText.trim().match(/(\d{1,2})\/(\d{1,2})/);
+    const tm = timeText.trim().match(/(\d{1,2}):(\d{2})/);
+    const lm = (lenText || '').match(/(\d+)/);
+    if (!dm || !tm) return;
+
+    const day = +dm[1], month = +dm[2];
+    const hour = +tm[1], minute = +tm[2];
+    const lenMin = lm ? +lm[1] : 0;
+
+    // Exam times are Beijing time (UTC+8). Build the actual UTC moment.
+    const start = new Date(Date.UTC(EXAM_YEAR, month - 1, day, hour - 8, minute, 0, 0));
+    const end   = new Date(start.getTime() + lenMin * 60000);
+
+    exams.push({ row, start, end, lenMin });
+  });
+
+  exams.sort((a, b) => a.start - b.start || b.end - a.end);
+
+  // Cache references in subject cells; create status badge nodes (badge sits inline after subject text)
+  exams.forEach(ex => {
+    const subjCell = ex.row.querySelector('.sc-subj');
+    if (!subjCell) return;
+    // capture clean subject text BEFORE the badge becomes a child
+    ex.subjText = subjCell.textContent.trim().replace(/\s+/g, ' ');
+    const badge = document.createElement('span');
+    badge.className = 'ex-status upcoming';
+    badge.textContent = '—';
+    subjCell.appendChild(badge);
+    ex.badge = badge;
+  });
+
+  // Map header rows to their following exam rows
+  const dayGroups = [];
+  let currentGroup = null;
+  Array.from(document.querySelectorAll('.sched-table tbody tr')).forEach(tr => {
+    if (tr.classList.contains('sched-day')) {
+      currentGroup = { header: tr, rows: [] };
+      const cs = tr.querySelector('.day-count');
+      if (cs && !cs.dataset.original) cs.dataset.original = cs.textContent.trim();
+      dayGroups.push(currentGroup);
+    } else if (tr.classList.contains('sched-row') && currentGroup) {
+      currentGroup.rows.push(tr);
+    }
+  });
+
+  const pad2 = n => String(n).padStart(2, '0');
+  const DOW_EN = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+
+  // Beijing-time formatter for the live clock display
+  const fmtBJT = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Shanghai',
+    weekday: 'short',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  });
+  function bjtParts(d) {
+    const m = {};
+    for (const p of fmtBJT.formatToParts(d)) m[p.type] = p.value;
+    return m;
+  }
+
+  // Verbose: "2d 14:23:45" or "23:59:45". Always shows seconds.
+  function fmtFull(ms) {
+    if (ms < 0) ms = 0;
+    const totalSec = Math.floor(ms / 1000);
+    const d = Math.floor(totalSec / 86400);
+    const h = Math.floor((totalSec % 86400) / 3600);
+    const m = Math.floor((totalSec % 3600) / 60);
+    const s = totalSec % 60;
+    if (d > 0) return `${d}d ${pad2(h)}:${pad2(m)}:${pad2(s)}`;
+    return `${pad2(h)}:${pad2(m)}:${pad2(s)}`;
+  }
+
+  const elClockTime  = document.getElementById('ssbClockTime');
+  const elClockMeta  = document.getElementById('ssbClockMeta');
+  const elCountdown  = document.getElementById('ssbCountdown');
+  const elSubj       = document.getElementById('ssbSubj');
+  const elNextLabel  = document.getElementById('ssbNextLabel');
+  const elDoneCount  = document.getElementById('ssbDoneCount');
+  const elDoneDays   = document.getElementById('ssbDoneDays');
+  const elPbWrap     = document.getElementById('ssbProgressBar');
+  const elPbFill     = document.getElementById('ssbProgressFill');
+
+  function update() {
+    const now = new Date();
+
+    let liveExam = null;
+    let nextExam = null;
+    let nextStartTime = null;
+    let doneCount = 0;
+
+    exams.forEach(ex => {
+      ex.row.classList.remove('exam-done', 'exam-live', 'exam-next', 'exam-upcoming');
+      if (!ex.badge) return;
+      ex.badge.className = 'ex-status';
+
+      if (now >= ex.end) {
+        ex.row.classList.add('exam-done');
+        ex.badge.classList.add('done');
+        ex.badge.textContent = '✓ DONE';
+        doneCount++;
+      } else if (now >= ex.start && now < ex.end) {
+        ex.row.classList.add('exam-live');
+        ex.badge.classList.add('live');
+        const remain = ex.end - now;
+        ex.badge.textContent = '● LIVE ' + fmtFull(remain);
+        if (!liveExam) liveExam = ex;
+      } else {
+        ex.row.classList.add('exam-upcoming');
+        ex.badge.classList.add('upcoming');
+        ex.badge.textContent = 'T- ' + fmtFull(ex.start - now);
+        if (nextStartTime === null || ex.start < nextStartTime) {
+          nextStartTime = ex.start;
+          nextExam = ex;
+        }
+      }
+    });
+
+    if (nextExam && !liveExam) {
+      exams
+        .filter(ex => ex.start.getTime() === nextStartTime.getTime())
+        .forEach(ex => {
+          ex.row.classList.remove('exam-upcoming');
+          ex.row.classList.add('exam-next');
+          if (ex.badge) {
+            ex.badge.classList.remove('upcoming');
+            ex.badge.classList.add('next');
+          }
+        });
+    }
+
+    // ----- Top banner: clock cell (Beijing time) -----
+    const bj = bjtParts(now);
+    if (elClockTime) {
+      elClockTime.textContent = bj.hour + ':' + bj.minute + ':' + bj.second;
+    }
+    if (elClockMeta) {
+      elClockMeta.textContent =
+        bj.weekday.toUpperCase() + ' · ' + bj.day + '/' + bj.month + '/' + bj.year + ' · 北京时间 / BEIJING TIME';
+    }
+
+    // ----- Top banner: next/live cell -----
+    function getSubjLabel(ex) {
+      const compEl = ex.row.querySelector('.sc-comp');
+      const lvlEl  = ex.row.querySelector('.sc-lvl');
+      const subj = ex.subjText || '';
+      const comp = compEl ? compEl.textContent.trim() : '';
+      const lvl  = lvlEl  ? lvlEl.textContent.trim()  : '';
+      return { subj, comp, lvl };
+    }
+
+    if (liveExam) {
+      const remain = liveExam.end - now;
+      const { subj, comp, lvl } = getSubjLabel(liveExam);
+      if (elNextLabel) elNextLabel.textContent = 'IN PROGRESS / 进行中';
+      if (elCountdown) {
+        elCountdown.className = 'ssb-countdown live';
+        elCountdown.textContent = fmtFull(remain) + ' LEFT';
+      }
+      if (elSubj) {
+        elSubj.innerHTML = '<span class="ssb-tag live">LIVE</span>' + subj + ' · ' + lvl + ' · ' + comp;
+      }
+      if (elPbWrap && elPbFill) {
+        elPbWrap.style.display = 'block';
+        const total = liveExam.end - liveExam.start;
+        const elapsed = now - liveExam.start;
+        const pct = Math.max(0, Math.min(100, (elapsed / total) * 100));
+        elPbFill.style.width = pct.toFixed(1) + '%';
+      }
+    } else if (nextExam) {
+      const remain = nextExam.start - now;
+      const { subj, comp, lvl } = getSubjLabel(nextExam);
+      if (elNextLabel) elNextLabel.textContent = 'NEXT EXAM / 下一场考试';
+      if (elCountdown) {
+        elCountdown.className = 'ssb-countdown';
+        elCountdown.textContent = 'T- ' + fmtFull(remain);
+      }
+      if (elSubj) {
+        const nbj = bjtParts(nextExam.start);
+        const dateStr = nbj.day + '/' + nbj.month + ' · ' + nbj.hour + ':' + nbj.minute;
+        elSubj.innerHTML = '<span class="ssb-tag next">NEXT</span>' + subj + ' · ' + lvl + ' · ' + comp +
+                           ' · <span style="color:var(--muted);font-weight:600;">' + dateStr + ' BJT</span>';
+      }
+      if (elPbWrap) elPbWrap.style.display = 'none';
+    } else {
+      if (elNextLabel) elNextLabel.textContent = 'STATUS / 状态';
+      if (elCountdown) {
+        elCountdown.className = 'ssb-countdown all-done';
+        elCountdown.textContent = '✓ ALL EXAMS COMPLETE';
+      }
+      if (elSubj) elSubj.textContent = '2026 IB MAY SESSION ENDED';
+      if (elPbWrap) elPbWrap.style.display = 'none';
+    }
+
+    // ----- Day header summaries -----
+    let daysCleared = 0;
+    dayGroups.forEach(g => {
+      const cs = g.header.querySelector('.day-count');
+      if (!cs) return;
+      const original = cs.dataset.original || cs.textContent;
+      const total = g.rows.length;
+      const done  = g.rows.filter(r => r.classList.contains('exam-done')).length;
+      const live  = g.rows.some(r => r.classList.contains('exam-live'));
+
+      cs.classList.remove('day-done', 'day-live', 'day-next', 'day-red');
+
+      if (live) {
+        cs.textContent = '● LIVE NOW';
+        cs.classList.add('day-live');
+      } else if (total > 0 && done === total) {
+        cs.textContent = '✓ ' + total + (total === 1 ? ' PAPER' : ' PAPERS') + ' DONE';
+        cs.classList.add('day-done');
+        daysCleared++;
+      } else if (done > 0) {
+        cs.textContent = done + '/' + total + ' DONE · ' + (total - done) + ' LEFT';
+      } else {
+        cs.textContent = original;
+        // restore the red class for "HEAVY" / "PEAK" days from original text
+        if (/HEAVY|PEAK|CLOSING|OPENING/.test(original)) {
+          if (/HEAVY|PEAK/.test(original)) cs.classList.add('day-red');
+        }
+      }
+    });
+
+    // ----- Totals -----
+    if (elDoneCount) elDoneCount.textContent = doneCount;
+    if (elDoneDays)  elDoneDays.textContent  = daysCleared;
+  }
+
+  update();
+  setInterval(update, 1000);
+})();
 </script>
 
 </body>
